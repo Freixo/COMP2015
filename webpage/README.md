@@ -1,1 +1,1 @@
-COMP2015 - Turing Machine
+# COMP2015
