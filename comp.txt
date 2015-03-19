@@ -1,0 +1,22 @@
+TM{
+
+	Definition{
+		States={q0,q1,q2}
+		Alphabet={0,1,X,B}
+		TapeAl={0,1}
+		Blank={B}
+		InitState={q0}
+		FinalState={q2}
+	}
+
+	Transitions{
+		(q0,0)>(q0,1,R)
+		(q0,1)>(q1,0,S)
+		(q1,0>)(q2,1,L)
+	}
+	
+	Input{
+		InputLabel={1000001100}
+	}
+
+}
