@@ -32,23 +32,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">COMP2015</a>
+                <a class="navbar-brand" href="">TMS</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-<!--
                  <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a target="_blank" class="navbar-brand" href="http://sigarra.up.pt/feup/en/WEB_PAGE.INICIAL">FEUP</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
+                        <a target="_blank" class="navbar-brand" href="http://sigarra.up.pt/feup/en/UCURR_GERAL.FICHA_UC_VIEW?pv_ocorrencia_id=272732">Course</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a target="_blank" class="navbar-brand" href="http://en.wikipedia.org/wiki/Turing_machine">Turing Machine</a>
                     </li>
                 </ul> 
--->
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -64,24 +62,66 @@
             </div>
         </div>
         <!-- /.row -->
+		
+		
+		<div class="row">
+			<canvas id="canvas" width="800" height="600">
+				<span class="error">Your browser does not support<br>the HTML5 &lt;canvas&gt; element</span>
+			</canvas>
+		</div>
+		
+		<div id="tut" class="row">
+			<p class="center">Export as: <a href="javascript:saveAsPNG()">PNG</a> |
+			<a href="javascript:saveAsLaTeX()">LaTeX</a></p>
+			<p>The big white box above is the TSM designer.&nbsp; Here's how to use it:</p>
+			<ul>
+				<li><b>Add a state:</b> double-click on the canvas</li>
+				<li><b>Add an arrow:</b> shift-drag on the canvas</li>
+				<li><b>Move something:</b> drag it around</li>
+				<li><b>Delete something:</b> click it and press the delete key (not the backspace key)</li>
+			</ul><ul>
+				<li><b>Make accept state:</b> double-click on an existing state</li>
+				<li><b>Type numeric subscript:</b> put an underscore before the number (like "S_0")</li>
+				<li><b>Type greek letter:</b> put a backslash before it (like "\beta")</li>
+			</ul>
+			
+			
+			<button id ="test"> TEST </button>
+		</div>
+		
 
+		<footer class="footer">
+			<div class="container">
+				<ul class="list-unstyled">
+					COMP 2015 @FEUP
+				</ul>
+			</div>
+		</footer>	
+		
+			
     </div>
     <!-- /.container -->
 	
-	<footer class="footer">
-      <div class="container">
-        <ul class="list-unstyled">
-			<li>Bootstrap v3.3.1</li>
-			<li>jQuery v1.11.1</li>
-		</ul>
-      </div>
-    </footer>	
+	
 
     <!-- jQuery Version 1.11.1 -->
     <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+	
+	<!-- Finite State Machine -->
+	<script src="js/node.js"></script>
+	<script src="js/link.js"></script>
+	<script src="js/self_link.js"></script>
+	<script src="js/start_link.js"></script>
+	<script src="js/temporary_link.js"></script>
+	<script src="js/latex.js"></script>
+	<script src="js/math.js"></script>
+	<script src="js/save.js"></script>
+	<script src="js/fsm.js"></script>
+	
+	
 
 </body>
 
