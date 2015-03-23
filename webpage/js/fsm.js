@@ -385,12 +385,3 @@ function saveAsLaTeX() {
 	var texData = exporter.toLaTeX();
 	window.open("data:text/html," + encodeURIComponent("<textarea style='display:block;width:100%;height:100%'>" + texData + "</textarea>"), '_blank', "width=500,height=500,display=block").focus();
 }
-
-
-$( document ).ready(function() {
-    	
-	$("#test").click(function() {
-		console.log(nodes);
-		console.log(links);
-	});
-});

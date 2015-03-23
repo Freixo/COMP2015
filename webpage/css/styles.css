@@ -35,6 +35,11 @@ h1 {
 	font: italic 20px Georgia, serif;
 }
 
+#tmt {
+	text-align: left;
+	font: 20px Courier, serif;
+}
+
 
 /* Custom page CSS
 -------------------------------------------------- */
