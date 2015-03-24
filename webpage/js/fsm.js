@@ -110,7 +110,13 @@ function drawUsing(c) {
 	for(var i = 0; i < nodes.length; i++) {
 		c.lineWidth = 1;
 		c.fillStyle = c.strokeStyle = (nodes[i] == selectedObject) ? 'blue' : 'black';
+		if (nodes[i].highlighted) {
+			c.fillStyle = c.strokeStyle = "#FF0000";
+			c.lineWidth = 2;
+		}
 		nodes[i].draw(c);
+		c.fillStyle = 'black';
+		c.lineWidth = 1;
 	}
 	for(var i = 0; i < links.length; i++) {
 		c.lineWidth = 1;
@@ -128,7 +134,7 @@ function drawUsing(c) {
 
 function draw() {
 	drawUsing(canvas.getContext('2d'));
-	saveBackup();
+	//saveBackup();
 }
 
 function selectObject(x, y) {
@@ -385,3 +391,12 @@ function saveAsLaTeX() {
 	var texData = exporter.toLaTeX();
 	window.open("data:text/html," + encodeURIComponent("<textarea style='display:block;width:100%;height:100%'>" + texData + "</textarea>"), '_blank', "width=500,height=500,display=block").focus();
 }
+
+function clearCanvas() {
+	nodes.splice(0, nodes.length);
+	links.splice(0, links.length);
+	canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+	
+	localStorage['fsm'] = null;
+}
+

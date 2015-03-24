@@ -28,15 +28,26 @@ TuringMachine.prototype.next = function() {
 			} else if(dir == "S") {
 				this.curState = this.transitions[i].stateB;
 			}
+			
+			for (var k = 0; k < nodes.length; k++) {
+				nodes[k].highlighted = false;
+				if (this.curState == nodes[k].text) {
+					nodes[k].highlighted = true;
+				}
+			}
+			
+			resetCaret();
+			draw();
+			
 			return 0;
 		}
 	}
+	resetCaret();
+	draw();
 	
 	if ( $.inArray(this.curState, this.definition.finals) != -1) {
-		alert("SUCCESS");
 		return 1;
 	} else {
-		alert("FAIL. NO TRANSITION FOUND!");
 		return -1;
 	}
 }
@@ -45,6 +56,78 @@ TuringMachine.prototype.reset = function() {
 	this.tape = this.definition.blank + this.input + this.definition.blank;
 	this.tapePos = 0;
 	this.curState = this.definition.initial;
+	
+	for (var k = 0; k < nodes.length; k++) {
+		nodes[k].highlighted = false;
+		if (this.curState == nodes[k].text) {
+			nodes[k].highlighted = true;
+			var pos = {
+				'x': nodes[k].x - 50,
+				'y': nodes[k].y - 50,
+			};
+			links.push(new StartLink(nodes[k], pos));
+		}
+	}
+	
+}
+
+TuringMachine.prototype.init = function() {
+	var states = this.definition.states;
+	var numOfStates = states.length;
+	var offx = 150;
+	var offy = 0;
+	for (var i = 0; i < numOfStates; i++) {
+		if ((i % 4) == 0) {
+			offx = 150;
+			offy += 150
+		}
+		var tmp_node = new Node(offx, offy);
+		offx += 150;
+		tmp_node.text = states[i];
+		if ($.inArray(states[i], this.definition.finals) != -1) {
+			tmp_node.isAcceptState = true;
+		}
+		nodes.push(tmp_node);
+	}
+	
+	var transitions = this.transitions;
+	for (var i = 0; i < nodes.length; i++) {
+		for (var j = 0; j < transitions.length; j++) {
+			if (nodes[i].text == transitions[j].stateA) {
+				for (var k = 0; k < nodes.length; k++) {
+					if (nodes[k].text == transitions[j].stateB) {
+						if (transitions[j].stateA == transitions[j].stateB) {
+							var pos = {
+								'x': nodes[i].x,
+								'y': nodes[i].y - 100,
+							};
+							links.push(new SelfLink(nodes[i], pos));
+						} else {
+							links.push(new Link(nodes[i], nodes[k]));
+						}
+					}
+				}
+			}
+			
+		}
+	}
+	
+	
+	for (var k = 0; k < nodes.length; k++) {
+		nodes[k].highlighted = false;
+		if (this.curState == nodes[k].text) {
+			nodes[k].highlighted = true;
+			var pos = {
+				'x': nodes[k].x - 50,
+				'y': nodes[k].y - 50,
+			};
+			links.push(new StartLink(nodes[k], pos));
+		}
+	}
+	
+	
+	resetCaret();
+	draw();
 }
 
 
@@ -79,13 +162,12 @@ $( document ).ready(function() {
 		new Transition("q0", "B", "q1", "B", "R"),
 		new Transition("q1", "a", "q2", "a", "R"),
 		new Transition("q2", "b", "q3", "b", "R"),
-		
 		new Transition("q3", "a", "q3", "a", "R"),
 		new Transition("q3", "B", "h", "B", "S")
 	]
 	
 	var tm = new TuringMachine(def, trans, "abaa");
-	
+
 	var spacing = "";
 	for (var i = 0; i < tm.tapePos; i++) {
 	spacing = spacing + " ";
@@ -98,6 +180,7 @@ $( document ).ready(function() {
 	$("#test").click(function() {
 		
 		tm.next();
+		console.log(links);
 		
 		$("#tape").text(tm.tape);
 		var spacing = "";
@@ -121,6 +204,15 @@ $( document ).ready(function() {
 
 		$("#tape").text(tm.tape);
 		
+	});
+	
+	$("#init").click(function() {
+		clearCanvas();
+		tm.init();
+	});
+	
+	$("#clear").click(function() {
+		clearCanvas();
 	});
 	
 	
