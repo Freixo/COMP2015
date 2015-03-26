@@ -28,16 +28,16 @@ h1 {
 	font: bold italic 50px Georgia, serif;
 }
 
-#tut {
-	margin: 30px auto;
-	text-align: left;
+#tapeScreen {
+	margin: 5px auto;
+	text-align: center;
 	max-width: 800px;
-	font: italic 20px Georgia, serif;
+	font: bold 20px Courier, serif;
 }
 
-#tmt {
-	text-align: left;
-	font: 20px Courier, serif;
+.btn-default, .btn-primary {
+	font: bold italic 20px Georgia, serif;
+	margin-bottom: 10px;
 }
 
 
@@ -74,4 +74,76 @@ canvas {
 	font-size: 28px;
 	line-height: 30px;
 	padding: 30px;
+}
+
+
+/* Upload
+--------------------------------------------------- */
+
+/* layout.css Style */
+.upload-drop-zone {
+  border-width: 2px;
+  margin-bottom: 20px;
+  font: bold italic 20px Georgia, serif;
+}
+
+/* skin.css Style*/
+.upload-drop-zone {
+  border-style: dashed;
+  border-color: #666;
+  border-width:2px;
+  line-height: 30px;
+  text-align: center;
+  color: #666;
+  
+  /* background-color: rgba(100,100,100,0.2); */
+  
+  
+  padding:10px;
+  margin-bottom: 25px;
+}
+
+.upload-drop-zone.drop {
+  border-color: #222;
+}
+
+.fileUpload {
+	position: relative;
+	overflow: hidden;
+	margin: 10px;
+	
+	font: bold italic 20px Georgia, serif;
+}
+.fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+#lexicalVerification {
+	font: bold italic 40px Georgia, serif;
+}
+
+
+#dataInput {
+	height:350px;
+	margin-bottom:50px;
+}
+
+#dataInput textarea {
+    resize: vertical;
+	margin-bottom:20px;
+	font: bold 20px Courier, serif;
+}
+
+#dataControl .btn {
+	margin-left: 10px;
+	margin-right: 10px;
+	font: bold 30px Courier, serif;
 }

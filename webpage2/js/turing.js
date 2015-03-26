@@ -187,8 +187,6 @@ function Definition(states, alphabet, blank, initial, finals){
 	
 }
 
-
-
 function Transition(stateA, input, stateB, output, direction) {
 	this.id = curTransitionID++;
 

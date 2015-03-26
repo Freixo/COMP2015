@@ -56,66 +56,69 @@
     <!-- Page Content -->
     <div class="container">
 
-        <div class="row">
+        <div class="row" style="padding-bottom:75px;">
             <div class="col-lg-12 text-center">
                 <h1>Turing Machine Simulator</h1>
             </div>
         </div>
         <!-- /.row -->
 		
-		<div id="tmt" class="row">
 		
-			<img src="img/tm-ex1.jpg" alt="Smiley face" height="100%" width="100%"> <br>
+		<!-- Drop Zone -->
+		<div class="row upload-drop-zone" id="drop-zone">
+			<div class="fileUpload btn btn-primary">
+				<input type="file" class="upload" id="fileInput"><span>Select File</span></input>
+			</div>
 			<br>
-			<button id="init"> Initialize </button>
-			<button id="clear"> Clear </button>
-			<br><br>
-			<button id ="test"> NEXT </button>
-			<button id ="reset"> RESET </button>
-		
-			<br><br>
-			<span> TAPE: </span>
-			<span id="tape"></span><br>
-			<span id="tapePos"></span>
-			<br><br>
-			<span> CUR STATE: </span>
-			<span id="cur"></span>
-			<br><br>
-			
-			
+			Or drag and drop here
 		</div>
 		
-		<div class="row">
-			
+		<div id="dataInput" class="row">
+			<button id="clearText" class="btn btn-default pull-right"> Clear </button>
+			<textarea id="inputText" class="form-control" rows="9"></textarea>
+			<button id="lexicalVerification" class="btn btn-primary pull-center"> Verify <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></button>
 		</div>
 		
-		<div class="row">
-			<canvas id="canvas" width="800" height="600">
-				<span class="error">Your browser does not support<br>the HTML5 &lt;canvas&gt; element</span>
-			</canvas>
-		</div>
+		<div id="controlSection">
 		
-		<div id="tut" class="row">
-			<p class="center">Export as: <a href="javascript:saveAsPNG()">PNG</a> |
-			<a href="javascript:saveAsLaTeX()">LaTeX</a></p>
-			<p>How to use it:</p>
-			<ul>
-				<li><b>Add a state:</b> double-click on the canvas</li>
-				<li><b>Add an arrow:</b> shift-drag on the canvas</li>
-				<li><b>Move something:</b> drag it around</li>
-				<li><b>Delete something:</b> click it and press the delete key (not the backspace key)</li>
-			</ul><ul>
-				<li><b>Make accept state:</b> double-click on an existing state</li>
-				<li><b>Type numeric subscript:</b> put an underscore before the number (like "S_0")</li>
-				<li><b>Type greek letter:</b> put a backslash before it (like "\beta")</li>
-			</ul>
+			<div id="dataControl" class="row">
+				
+				<button id="init" class="btn btn-default pull-center"> Initialize </button>
+				<button id="clear" class="btn btn-default pull-center"> Clear </button>
+				<button id ="test" class="btn btn-default pull-center"> Next </button>
+				<button id ="reset" class="btn btn-default pull-center"> Reset </button>
+				
+			</div>
 			
+			<div id="tapeScreen" class="row">
 			
+				<!-- TODO BETTER TAPE -->
+				<br><br>
+				<span> TAPE: </span>
+				<span id="tape"></span><br>
+				<span id="tapePos"></span>
+				<br><br>
+				<span> CUR STATE: </span>
+				<span id="cur"></span>
+				<br><br>
+				
+			</div>
+			
+			<div class="row">
+				<canvas id="canvas" width="800" height="600">
+					<span class="error">Your browser does not support<br>the HTML5 &lt;canvas&gt; element</span>
+				</canvas>
+			</div>
+			
+			<div id="tapeScreen" class="row">
+				<p class="center">Export as: <a href="javascript:saveAsPNG()">PNG</a> |
+				<a href="javascript:saveAsLaTeX()">LaTeX</a></p>
+			</div>
 			
 		</div>
 		
 
-		<footer class="footer">
+		<footer class="footer pull-right">
 			<div class="container">
 				<ul class="list-unstyled">
 					COMP 2015 @FEUP
@@ -146,7 +149,8 @@
 	<script src="js/save.js"></script>
 	<script src="js/fsm.js"></script>
 	<script src="js/turing.js"></script>
-	
+	<script src="js/upload.js"></script>
+	<script src="js/core.js"></script>
 	
 
 </body>
