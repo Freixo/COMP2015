@@ -1,0 +1,77 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+	position: relative;
+	min-height: 100%;
+	
+}
+body {
+	padding-top: 70px;
+	margin-bottom: 60px;
+  
+	text-align: center;
+	background: #DFDFDF;
+	margin: 0 30px 100px 30px;
+	font: bold italic 10px Georgia, serif;
+}
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	text-align: right;
+	height: 60px;
+	padding-right: 50px;
+	max-width: 1080px;
+}
+
+h1 {
+	font: bold italic 50px Georgia, serif;
+}
+
+#tut {
+	margin: 30px auto;
+	text-align: left;
+	max-width: 800px;
+	font: italic 20px Georgia, serif;
+}
+
+#tmt {
+	text-align: left;
+	font: 20px Courier, serif;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container {
+	width: auto;
+	max-width: 1080px;
+	padding: 0 15px;
+}
+.container .text-muted {
+	margin: 20px 0;
+}
+
+
+/* Canvas
+-------------------------------------------------- */
+
+canvas {
+	align: center;
+	display: block;
+	max-width: 800px;
+	background: white;
+	border-radius: 20px;
+	-moz-border-radius: 20px;
+	margin: 10px auto;
+}
+
+.error {
+	display: block;
+	color: red;
+	font-size: 28px;
+	line-height: 30px;
+	padding: 30px;
+}

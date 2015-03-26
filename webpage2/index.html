@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Bare - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+    <link href="css/styles.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">TMS</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                 <ul class="nav navbar-nav">
+                    <li>
+                        <a target="_blank" class="navbar-brand" href="http://sigarra.up.pt/feup/en/WEB_PAGE.INICIAL">FEUP</a>
+                    </li>
+                    <li>
+                        <a target="_blank" class="navbar-brand" href="http://sigarra.up.pt/feup/en/UCURR_GERAL.FICHA_UC_VIEW?pv_ocorrencia_id=272732">Course</a>
+                    </li>
+                    <li>
+                        <a target="_blank" class="navbar-brand" href="http://en.wikipedia.org/wiki/Turing_machine">Turing Machine</a>
+                    </li>
+                </ul> 
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>Turing Machine Simulator</h1>
+            </div>
+        </div>
+        <!-- /.row -->
+		
+		<div id="tmt" class="row">
+		
+			<img src="img/tm-ex1.jpg" alt="Smiley face" height="100%" width="100%"> <br>
+			<br>
+			<button id="init"> Initialize </button>
+			<button id="clear"> Clear </button>
+			<br><br>
+			<button id ="test"> NEXT </button>
+			<button id ="reset"> RESET </button>
+		
+			<br><br>
+			<span> TAPE: </span>
+			<span id="tape"></span><br>
+			<span id="tapePos"></span>
+			<br><br>
+			<span> CUR STATE: </span>
+			<span id="cur"></span>
+			<br><br>
+			
+			
+		</div>
+		
+		<div class="row">
+			
+		</div>
+		
+		<div class="row">
+			<canvas id="canvas" width="800" height="600">
+				<span class="error">Your browser does not support<br>the HTML5 &lt;canvas&gt; element</span>
+			</canvas>
+		</div>
+		
+		<div id="tut" class="row">
+			<p class="center">Export as: <a href="javascript:saveAsPNG()">PNG</a> |
+			<a href="javascript:saveAsLaTeX()">LaTeX</a></p>
+			<p>How to use it:</p>
+			<ul>
+				<li><b>Add a state:</b> double-click on the canvas</li>
+				<li><b>Add an arrow:</b> shift-drag on the canvas</li>
+				<li><b>Move something:</b> drag it around</li>
+				<li><b>Delete something:</b> click it and press the delete key (not the backspace key)</li>
+			</ul><ul>
+				<li><b>Make accept state:</b> double-click on an existing state</li>
+				<li><b>Type numeric subscript:</b> put an underscore before the number (like "S_0")</li>
+				<li><b>Type greek letter:</b> put a backslash before it (like "\beta")</li>
+			</ul>
+			
+			
+			
+		</div>
+		
+
+		<footer class="footer">
+			<div class="container">
+				<ul class="list-unstyled">
+					COMP 2015 @FEUP
+				</ul>
+			</div>
+		</footer>	
+		
+			
+    </div>
+    <!-- /.container -->
+	
+	
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	
+	<!--  -->
+	<script src="js/node.js"></script>
+	<script src="js/link.js"></script>
+	<script src="js/self_link.js"></script>
+	<script src="js/start_link.js"></script>
+	<script src="js/temporary_link.js"></script>
+	<script src="js/latex.js"></script>
+	<script src="js/math.js"></script>
+	<script src="js/save.js"></script>
+	<script src="js/fsm.js"></script>
+	<script src="js/turing.js"></script>
+	
+	
+
+</body>
+
+</html>
