@@ -85,6 +85,8 @@ canvas {
   border-width: 2px;
   margin-bottom: 20px;
   font: bold italic 20px Georgia, serif;
+  background-color: rgba(102,102,102,0.2);
+  height:110px;
 }
 
 /* skin.css Style*/

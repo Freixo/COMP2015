@@ -11,19 +11,25 @@ window.addEventListener("drop",function(e){
 $( document ).ready(function() {
     $("#drop-zone").on("dragenter", function() {
 		$(this).css("border-color", "#007f00");
+		$(this).css("background-color", "rgba(0,127,0,0.2)");
 		$(this).css("color", "#007f00");
+		$("#fUp").hide();
 	});
 	
 	$("#drop-zone").on("dragleave", function(e) {
 		$(this).css("border-color", "#666");
+		$(this).css("background-color", "rgba(102,102,102,0.2)");
 		$(this).css("color", "#666");
+		$("#fUp").show();
 		e = e || event;
 		e.preventDefault();
 	});
 	
 	$("#drop-zone").on("drop", function(e) {
 		$(this).css("border-color", "#666");
+		$(this).css("background-color", "rgba(102,102,102,0.2)");
 		$(this).css("color", "#666");
+		$("#fUp").show();
 		e = e || event;
 		e.preventDefault();
 	});
