@@ -211,6 +211,8 @@ Transition.prototype.isSame = function(transition) {
 }
 
 function initializeTape() {
+	$("#curState").text(tMachine.curState);
+	
 	$("#tape").empty();
 	for (var i = 0, len = tMachine.tape.length; i < len; i++) {
 		if (i == 1) {
@@ -222,6 +224,8 @@ function initializeTape() {
 }
 
 function updateTape() {
+	$("#curState").text(tMachine.curState);
+	
 	$("#tape").empty();
 	for (var i = 0, len = tMachine.tape.length; i < len; i++) {
 		if (i == tMachine.tapePos) {
