@@ -45,6 +45,11 @@ TuringMachine.prototype.next = function() {
 				}
 			}
 			
+			if ( $.inArray(this.curState, this.definition.finals) != -1) {
+				this.halt = true;
+				return 1;
+			}
+			
 			resetCaret();
 			draw();
 			
@@ -281,6 +286,7 @@ function tmDelete() {
 function tmReset() {
 	tMachine.reset();
 	$("#next").removeClass("disabled");
+	updateTape();
 }
 
 function tmNext() {
@@ -291,7 +297,6 @@ function tmNext() {
 	} else {
 		$("#next").removeClass("disabled");
 	}
-	
 	updateTape();
 }
 
