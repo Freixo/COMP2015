@@ -120,14 +120,13 @@ canvas {
 .upload-drop-zone {
   border-style: dashed;
   border-color: #666;
-  border-width:2px;
+  border-width:3px;
   line-height: 30px;
   text-align: center;
   color: #666;
+  margin: 0 auto;
   
-  /* background-color: rgba(100,100,100,0.2); */
-  
-  
+
   padding:10px;
   margin-bottom: 25px;
 }
