@@ -165,14 +165,25 @@ canvas {
 	margin-bottom:10px;
 }
 
+#dataControl {
+	margin-left: 20px;
+	background-color:rgba(0,0,99,0.1);
+	padding-top:10px;
+}
+
 #dataControl .btn {
-	margin-top:20px;
-	margin-left: 10px;
-	margin-right: 10px;
 	font: bold 30px Courier, serif;
 	width:150px;
 }
 
 #verifyAlert {
 	font: bold italic 30px Georgia, serif;
+}
+
+.btn{
+	pointer-events:auto;
+}
+
+input[disabled] {
+	cursor: not-allowed;
 }

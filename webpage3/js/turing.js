@@ -263,7 +263,7 @@ function tmInit() {
 	clearCanvas();
 	tMachine.init();
 	tmRunning = true;
-	$("#init").addClass("disabled");
+	$("#start").addClass("disabled");
 	$("#delete").removeClass("disabled");
 	$("#reset").removeClass("disabled");
 	$("#next").removeClass("disabled");
@@ -277,13 +277,17 @@ function tmDelete() {
 	$("#delete").addClass("disabled");
 	$("#reset").addClass("disabled");
 	$("#next").addClass("disabled");
-	$("#init").removeClass("disabled");
+	$("#start").removeClass("disabled");
 	
 	tMachine = null;
 	
 	validTM = "?";
 	updateVerifyUI();
 	clearTape();
+	
+	$("#inputText").focus();
+	
+	$("#curState").text("");
 	
 }
 
@@ -307,7 +311,7 @@ function tmNext() {
 
 $( document ).ready(function() {
 
-	$("#init").click(tmInit);
+	$("#start").click(tmInit);
 	
 	$("#delete").click(tmDelete);
 	
