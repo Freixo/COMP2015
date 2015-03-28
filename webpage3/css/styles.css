@@ -157,19 +157,13 @@ canvas {
 
 #lexicalVerification {
 	font: bold italic 40px Georgia, serif;
-}
-
-
-#dataInput {
-	height:350px;
 	margin-bottom:50px;
 }
 
-#dataInput textarea {
+#inputText {
     resize: vertical;
-	margin-bottom:20px;
 	font: bold 20px Courier, serif;
-	
+	margin-bottom:10px;
 }
 
 #dataControl .btn {
