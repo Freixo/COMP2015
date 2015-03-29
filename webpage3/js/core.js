@@ -40,7 +40,7 @@ function verifyLex() {
 				new Transition("q3", "B", "h", "B", "S")
 			]
 			
-			tMachine = new TuringMachine(def, trans, "abaa");
+			tMachine = new TuringMachine(def, trans);
 			
 			
 			

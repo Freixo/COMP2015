@@ -36,7 +36,7 @@ h1 {
 }
 
 #tape {
-	margin-left:40px;
+	margin-left:13px;
 	margin-bottom:10px;
 }
 
@@ -46,12 +46,6 @@ h1 {
 
 #tape > li > a, .pagination-lg > li > span {
 	font: bold 30px Courier, serif;
-}
-
-
-
-#curstategrp{
-	margin-left: 35px;
 }
 
 .btn {
@@ -92,7 +86,7 @@ canvas {
 	background: white;
 	border-radius: 20px;
 	-moz-border-radius: 20px;
-	margin: 10px auto;
+	margin: auto;
 }
 
 .error {
@@ -166,18 +160,32 @@ canvas {
 }
 
 #dataControl {
-	margin-left: 20px;
 	background-color:rgba(0,0,99,0.1);
 	padding-top:10px;
 }
 
 #dataControl .btn {
+	margin-left:10px;
+	margin-right:10px;
 	font: bold 30px Courier, serif;
 	width:150px;
 }
 
+#resultp {
+	text-align:center;
+	margin-top:20px;
+	font: bold 22px Courier, serif;
+}
+
+#result {
+	
+	font: bold 30px Courier, serif;
+	width:170px;
+}
+
 #verifyAlert {
 	font: bold italic 30px Georgia, serif;
+	margin-bottom:50px;
 }
 
 .btn{
@@ -186,4 +194,11 @@ canvas {
 
 input[disabled] {
 	cursor: not-allowed;
+}
+
+#tminput {
+	width:100%;
+	height:55px;
+	
+	font: bold 30px Courier, serif;
 }

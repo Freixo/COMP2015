@@ -74,43 +74,55 @@
 		</div>
 		
 		<button id="clearText" class="btn btn-default pull-right"> Clear </button>
-		<textarea id="inputText" class="form-control" rows="9" placeholder="Input TM Code here."></textarea>
+		<textarea id="inputText" class="form-control" rows="9" placeholder="Write TM code here."></textarea>
 		
 		<button id="lexicalVerification" class="btn btn-primary pull-center"> Verify <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></button>
 
 		
 		<div id="verifyAlert" class="alert alert-warning" role="alert" hidden>
 			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-			<span>Enter a valid email address</span>
+			<span></span>
 		</div>
 		
 		<div class="row">
-
-			<div id="dataControl" class="col-lg-2 btn-group-vertical">
-				<button id="start" class="btn btn-default pull-left"> Start </button>
-				<button id="delete" class="btn btn-danger pull-left disabled"> Delete </button>
-				<button id ="reset" class="btn btn-default pull-left disabled"> Reset </button>
-				<button id ="next" class="btn btn-primary pull-left disabled"> Next </button>
-			</div>
-			<div class="col-lg-9">
-			
-				<div id="curstategrp" class="btn-group pull-left">
-					<button type="button" class="btn btn-default curstate">Current<br>State: </button>
-					<button id="curState" type="button" class="btn btn-primary curstate"></button>
+			<div class="col-lg-2">
+				<div id="dataControl" class=" btn-group-vertical">
+					<button id="start" class="btn btn-default pull-left"> Start </button>
+					<button id="delete" class="btn btn-danger pull-left disabled"> Delete </button>
+					<button id ="reset" class="btn btn-default pull-left disabled"> Reset </button>
+					<button id ="next" class="btn btn-primary pull-left disabled"> Next </button>
+					
 				</div>
 				
-				<ul id="tape" class="pagination pagination-lg pull-left">
-					<li><a>&nbsp;</a></li>
-					<li><a>&nbsp;</a></li>
-					<li><a>&nbsp;</a></li>
-					<li><a>&nbsp;</a></li>
-					<li><a>&nbsp;</a></li>
-					<li><a>&nbsp;</a></li>
-					<li><a>&nbsp;</a></li>
-					<li><a>&nbsp;</a></li>
-					<li><a>&nbsp;</a></li>
-				</ul>
+				<p id="resultp" class="pull-center">Status:</p>
+				<button id="result" class="btn btn-default"> Waiting </button>
+			</div>
 
+			<div class="col-lg-9">
+				<div class="row">
+					<div class="col-lg-4">
+						<div id="curstategrp" class="btn-group pull-left">
+							<button type="button" class="btn btn-default curstate">Current<br>State: </button>
+							<button id="curState" type="button" class="btn btn-primary curstate"></button>
+						</div>
+					</div>
+					<div class="col-lg-8">
+						<input id="tminput" class="form-control" placeholder="TM Input" type="text"></input>
+					</div>
+				</div>
+				<div class="row">
+					<ul id="tape" class="pagination pagination-lg pull-left">
+						<li><a>&nbsp;</a></li>
+						<li><a>&nbsp;</a></li>
+						<li><a>&nbsp;</a></li>
+						<li><a>&nbsp;</a></li>
+						<li><a>&nbsp;</a></li>
+						<li><a>&nbsp;</a></li>
+						<li><a>&nbsp;</a></li>
+						<li><a>&nbsp;</a></li>
+						<li><a>&nbsp;</a></li>
+					</ul>
+				</div>
 				<canvas id="canvas" width="800" height="600">
 					<span class="error">Your browser does not support<br>the HTML5 &lt;canvas&gt; element</span>
 				</canvas>

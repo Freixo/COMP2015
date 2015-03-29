@@ -9,18 +9,31 @@ String.prototype.replaceAt=function(index, character) {
     return this.substr(0, index) + character + this.substr(index+character.length);
 }
 
-function TuringMachine(definition, transitions, input) {
+function TuringMachine(definition, transitions) {
 	this.definition = definition;
 	this.transitions = transitions;
-	this.input = input;
-	
-	this.tape = this.definition.blank + this.input + this.definition.blank;
+
 	this.tapePos = 1;
 	this.curState = this.definition.initial;
 	
+	this.inputReady = false;
+	
 	this.halt = false;
 }
+
+TuringMachine.prototype.setInput = function(input) {
+	this.input = input;
+	this.tape = this.definition.blank + this.input + this.definition.blank;
+	
+	this.inputReady = true;
+	
+}
+
 TuringMachine.prototype.next = function() {
+	
+	if (!this.inputReady) {
+		return;
+	}
 	
 	var input = this.tape[this.tapePos];
 	for (var i = 0; i < this.transitions.length; i++) {
@@ -47,6 +60,7 @@ TuringMachine.prototype.next = function() {
 			
 			if ( $.inArray(this.curState, this.definition.finals) != -1) {
 				this.halt = true;
+				updateStatus(2); // Success
 				return 1;
 			}
 			
@@ -61,9 +75,11 @@ TuringMachine.prototype.next = function() {
 	
 	if ( $.inArray(this.curState, this.definition.finals) != -1) {
 		this.halt = true;
+		updateStatus(2); // Success
 		return 1;
 	} else {
 		this.halt = true;
+		updateStatus(3); // Failure
 		return -1;
 	}
 }
@@ -243,7 +259,8 @@ function clearTape() {
 	}
 }
 
-function tmInit() {
+function tmStart() {
+	
 	if (validTM != "T") {
 		if (validTM == "?") {
 			$("#verifyAlert").removeClass("alert-danger");
@@ -258,7 +275,26 @@ function tmInit() {
 		return;
 	}
 	
+	var pattern = "^([" + tMachine.definition.alphabet.join("") + "]+)$";
+	if ($("#tminput").val() == "") {
+		$("#verifyAlert").removeClass("alert-danger");
+		$("#verifyAlert").addClass("alert-warning");
+		$("#verifyAlert").last().text("You must write the TM Input.");
+		$("#tminput").focus();
+		$("#verifyAlert").show(300);
+		return;
+	} else if($("#tminput").val().search(pattern) == -1) {
+		$("#verifyAlert").removeClass("alert-warning");
+		$("#verifyAlert").addClass("alert-danger");
+		$("#verifyAlert").last().text("Invalid Input.");
+		$("#tminput").focus();
+		$("#verifyAlert").show(300);
+		return;
+	}
+	
 	$("#verifyAlert").hide();
+	
+	tMachine.setInput($("#tminput").val());
 	
 	clearCanvas();
 	tMachine.init();
@@ -268,6 +304,7 @@ function tmInit() {
 	$("#reset").removeClass("disabled");
 	$("#next").removeClass("disabled");
 	
+	updateStatus(1); // Running
 	initializeTape();
 }
 
@@ -289,12 +326,39 @@ function tmDelete() {
 	
 	$("#curState").text("");
 	
+	updateStatus(0); // Waiting
+	
 }
 
 function tmReset() {
+	
+	var pattern = "^([" + tMachine.definition.alphabet.join("") + "]+)$";
+	if ($("#tminput").val() == "") {
+		$("#verifyAlert").removeClass("alert-danger");
+		$("#verifyAlert").addClass("alert-warning");
+		$("#verifyAlert").last().text("You must write the TM Input.");
+		$("#tminput").focus();
+		$("#verifyAlert").show(300);
+		return;
+	} else if($("#tminput").val().search(pattern) == -1) {
+		$("#verifyAlert").removeClass("alert-warning");
+		$("#verifyAlert").addClass("alert-danger");
+		$("#verifyAlert").last().text("Invalid Input.");
+		$("#tminput").focus();
+		$("#verifyAlert").show(300);
+		return;
+	}
+	
+	$("#verifyAlert").hide();
+	
+	tMachine.input = $("#tminput").val();
+	
 	tMachine.reset();
 	$("#next").removeClass("disabled");
 	updateTape();
+	
+	updateStatus(1); // Running
+	
 }
 
 function tmNext() {
@@ -308,10 +372,38 @@ function tmNext() {
 	updateTape();
 }
 
+function updateStatus(status) { //0: Waiting | 1: Running | 2: Success | 3: Failure
+	if (status == 0) {
+		$("#result").removeClass("btn-success");
+		$("#result").removeClass("btn-danger");
+		$("#result").removeClass("btn-warning");
+		$("#result").addClass("btn-default");
+		$("#result").text("Waiting");
+	} else if(status == 1) {
+		$("#result").removeClass("btn-success");
+		$("#result").removeClass("btn-danger");
+		$("#result").removeClass("btn-default");
+		$("#result").addClass("btn-warning");
+		$("#result").text("Running");
+	} else if(status == 2) {
+		$("#result").removeClass("btn-default");
+		$("#result").removeClass("btn-danger");
+		$("#result").removeClass("btn-warning");
+		$("#result").addClass("btn-success");
+		$("#result").text("Success");
+	} else if(status == 3) {
+		$("#result").removeClass("btn-success");
+		$("#result").removeClass("btn-default");
+		$("#result").removeClass("btn-warning");
+		$("#result").addClass("btn-danger");
+		$("#result").text("Failure");
+	}
+}
+
 
 $( document ).ready(function() {
 
-	$("#start").click(tmInit);
+	$("#start").click(tmStart);
 	
 	$("#delete").click(tmDelete);
 	
