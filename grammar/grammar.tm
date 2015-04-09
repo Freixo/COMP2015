@@ -1,14 +1,3 @@
-/~
-    This is a four-function calculator, where precedences
-    are defined via associativity definitions of tokens.
-
-    IMPORTANT: The Warnings coming up when invoking JS/CC
-               are coming from the grammar, and are resolved
-               in order to the precedences and associativity
-               information passed to each token.
-~/
-
-
 /~ --- Token definitions --- ~/
 
 /~ Characters to be ignored ~/
