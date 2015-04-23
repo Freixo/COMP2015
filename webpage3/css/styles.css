@@ -36,7 +36,7 @@ h1 {
 }
 
 #tape {
-	margin-left:13px;
+	margin-left:15px;
 	margin-bottom:10px;
 }
 
@@ -177,10 +177,11 @@ canvas {
 	font: bold 22px Courier, serif;
 }
 
-#result {
+#result, #curState {
 	
 	font: bold 30px Courier, serif;
 	width:170px;
+	margin-bottom:50px;
 }
 
 #verifyAlert {
@@ -197,8 +198,9 @@ input[disabled] {
 }
 
 #tminput {
-	width:100%;
+	width:468px;
 	height:55px;
 	
 	font: bold 30px Courier, serif;
+	margin-bottom:10px;
 }
