@@ -15,26 +15,26 @@ function TuringMachine(definition, transitions) {
 
 	this.tapePos = 1;
 	this.curState = this.definition.initial;
-	
+
 	this.inputReady = false;
-	
+
 	this.halt = false;
 }
 
 TuringMachine.prototype.setInput = function(input) {
 	this.input = input;
 	this.tape = this.definition.blank + this.input + this.definition.blank;
-	
+
 	this.inputReady = true;
-	
+
 }
 
 TuringMachine.prototype.next = function() {
-	
+
 	if (!this.inputReady) {
 		return;
 	}
-	
+
 	var input = this.tape[this.tapePos];
 	for (var i = 0; i < this.transitions.length; i++) {
 		if (this.curState == this.transitions[i].stateA && input == this.transitions[i].input) {
@@ -50,29 +50,29 @@ TuringMachine.prototype.next = function() {
 			} else if(dir == "S") {
 				this.curState = this.transitions[i].stateB;
 			}
-			
+
 			for (var k = 0; k < nodes.length; k++) {
 				nodes[k].highlighted = false;
 				if (this.curState == nodes[k].text) {
 					nodes[k].highlighted = true;
 				}
 			}
-			
+
 			if ( $.inArray(this.curState, this.definition.finals) != -1) {
 				this.halt = true;
 				updateStatus(2); // Success
 				return 1;
 			}
-			
+
 			resetCaret();
 			draw();
-			
+
 			return 0;
 		}
 	}
 	resetCaret();
 	draw();
-	
+
 	if ( $.inArray(this.curState, this.definition.finals) != -1) {
 		this.halt = true;
 		updateStatus(2); // Success
@@ -89,14 +89,14 @@ TuringMachine.prototype.reset = function() {
 	this.tape = this.definition.blank + this.input + this.definition.blank;
 	this.tapePos = 1;
 	this.curState = this.definition.initial;
-	
+
 	for (var k = 0; k < nodes.length; k++) {
 		nodes[k].highlighted = false;
 		if (this.curState == nodes[k].text) {
 			nodes[k].highlighted = true;
 		}
 	}
-	
+
 }
 
 TuringMachine.prototype.init = function() {
@@ -118,27 +118,27 @@ TuringMachine.prototype.init = function() {
 		}
 		nodes.push(tmp_node);
 	}
-	
+
 	var transitions = this.transitions;
 	for (var i = 0; i < nodes.length; i++) {
 		for (var j = 0; j < transitions.length; j++) {
 			if (nodes[i].text == transitions[j].stateA) {
 				for (var k = 0; k < nodes.length; k++) {
 					if (nodes[k].text == transitions[j].stateB) {
-					
+
 						var tmp_trans = this.hasTransitionLink(transitions[j]);
 						if (tmp_trans) {
-						
+
 							/*
 								*************************
-							
+
 								WARNING MIGHT BE A BUG HERE
-								
-								
+
+
 								*************************
-							
+
 							*/
-						
+
 							for (var u = 0; u < links.length; u++) {
 								if (tmp_trans.linkID == links[u].linkID) {
 									links[u].text.push(transitions[j].input + ":" + transitions[j].output + ", " + transitions[j].direction);
@@ -146,7 +146,7 @@ TuringMachine.prototype.init = function() {
 								}
 							}
 						} else {
-						
+
 							if (transitions[j].stateA == transitions[j].stateB) {
 								var pos = {
 									'x': nodes[i].x,
@@ -156,26 +156,26 @@ TuringMachine.prototype.init = function() {
 								li.linkID = curLinkID++;
 								li.text.push(transitions[j].input + ":" + transitions[j].output + ", " + transitions[j].direction);
 								links.push(li);
-								
+
 								transitions[j].linkID = li.linkID;
 							} else {
 								var li = new Link(nodes[i], nodes[k]);
 								li.linkID = curLinkID++;
 								li.text.push(transitions[j].input + ":" + transitions[j].output + ", " + transitions[j].direction);
 								links.push(li);
-								
+
 								transitions[j].linkID = li.linkID;
 							}
-							
+
 						}
 					}
 				}
 			}
-			
+
 		}
 	}
-	
-	
+
+
 	for (var k = 0; k < nodes.length; k++) {
 		nodes[k].highlighted = false;
 		if (this.curState == nodes[k].text) {
@@ -187,7 +187,7 @@ TuringMachine.prototype.init = function() {
 			links.push(new StartLink(nodes[k], pos));
 		}
 	}
-	
+
 	resetCaret();
 	draw();
 }
@@ -207,7 +207,7 @@ function Definition(states, alphabet, blank, initial, finals){
 	this.blank = blank;
 	this.initial = initial;
 	this.finals = finals;
-	
+
 }
 
 function Transition(stateA, input, stateB, output, direction) {
@@ -218,7 +218,7 @@ function Transition(stateA, input, stateB, output, direction) {
 	this.stateB = stateB;
 	this.output = output;
 	this.direction = direction;
-	
+
 	this.linkID = null;
 }
 
@@ -228,7 +228,7 @@ Transition.prototype.isSame = function(transition) {
 
 function initializeTape() {
 	$("#curState").text(tMachine.curState);
-	
+
 	$("#tape").empty();
 	for (var i = 0, len = tMachine.tape.length; i < len; i++) {
 		if (i == 1) {
@@ -241,7 +241,7 @@ function initializeTape() {
 
 function updateTape() {
 	$("#curState").text(tMachine.curState);
-	
+
 	$("#tape").empty();
 	for (var i = 0, len = tMachine.tape.length; i < len; i++) {
 		if (i == tMachine.tapePos) {
@@ -260,7 +260,7 @@ function clearTape() {
 }
 
 function tmStart() {
-	
+
 	if (validTM != "T") {
 		if (validTM == "?") {
 			$("#verifyAlert").removeClass("alert-danger");
@@ -274,7 +274,7 @@ function tmStart() {
 		$("#verifyAlert").show(300);
 		return;
 	}
-	
+
 	var pattern = "^([" + tMachine.definition.alphabet.join("") + "]+)$";
 	if ($("#tminput").val() == "") {
 		$("#verifyAlert").removeClass("alert-danger");
@@ -291,11 +291,11 @@ function tmStart() {
 		$("#verifyAlert").show(300);
 		return;
 	}
-	
+
 	$("#verifyAlert").hide();
-	
+
 	tMachine.setInput($("#tminput").val());
-	
+
 	clearCanvas();
 	tMachine.init();
 	tmRunning = true;
@@ -303,7 +303,7 @@ function tmStart() {
 	$("#delete").removeClass("disabled");
 	$("#reset").removeClass("disabled");
 	$("#next").removeClass("disabled");
-	
+
 	updateStatus(1); // Running
 	initializeTape();
 }
@@ -315,23 +315,23 @@ function tmDelete() {
 	$("#reset").addClass("disabled");
 	$("#next").addClass("disabled");
 	$("#start").removeClass("disabled");
-	
+
 	tMachine = null;
-	
+
 	validTM = "?";
 	updateVerifyUI();
 	clearTape();
-	
+
 	$("#inputText").focus();
-	
+
 	$("#curState").text("");
-	
+
 	updateStatus(0); // Waiting
-	
+
 }
 
 function tmReset() {
-	
+
 	var pattern = "^([" + tMachine.definition.alphabet.join("") + "]+)$";
 	if ($("#tminput").val() == "") {
 		$("#verifyAlert").removeClass("alert-danger");
@@ -348,17 +348,17 @@ function tmReset() {
 		$("#verifyAlert").show(300);
 		return;
 	}
-	
+
 	$("#verifyAlert").hide();
-	
+
 	tMachine.input = $("#tminput").val();
-	
+
 	tMachine.reset();
 	$("#next").removeClass("disabled");
 	updateTape();
-	
+
 	updateStatus(1); // Running
-	
+
 }
 
 function tmNext() {
@@ -404,11 +404,11 @@ function updateStatus(status) { //0: Waiting | 1: Running | 2: Success | 3: Fail
 $( document ).ready(function() {
 
 	$("#start").click(tmStart);
-	
+
 	$("#delete").click(tmDelete);
-	
+
 	$("#reset").click(tmReset);
-	
+
 	$("#next").click(tmNext);
-	
+
 });

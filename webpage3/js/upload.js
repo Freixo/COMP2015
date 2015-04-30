@@ -15,7 +15,7 @@ $( document ).ready(function() {
 		$(this).css("color", "#007f00");
 		$("#fUp").hide();
 	});
-	
+
 	$("#drop-zone").on("dragleave", function(e) {
 		$(this).css("border-color", "#666");
 		$(this).css("background-color", "rgba(102,102,102,0.2)");
@@ -24,7 +24,7 @@ $( document ).ready(function() {
 		e = e || event;
 		e.preventDefault();
 	});
-	
+
 	$("#drop-zone").on("drop", function(e) {
 		$(this).css("border-color", "#666");
 		$(this).css("background-color", "rgba(102,102,102,0.2)");
@@ -40,7 +40,7 @@ $( document ).ready(function() {
 		updateVerifyUI();
 		$("#inputText").focus();
 	});
-	
+
 	var fileInput = document.getElementById('fileInput');
 
     fileInput.addEventListener('change', function(e) {
@@ -48,14 +48,14 @@ $( document ).ready(function() {
 		loadTextArea(file);
 		fileInput.replaceWith(fileInput.val('').clone(true));
     });
-	
+
 });
 
 
 function handleFileSelect(evt) {
 	evt.stopPropagation();
 	evt.preventDefault();
-	
+
 	var file = evt.dataTransfer.files[0];
 	loadTextArea(file);
 }
@@ -78,7 +78,7 @@ function loadTextArea(file) {
 	validTM = "?";
 	updateVerifyUI();
 	var textArea = document.getElementById('inputText');
-			
+
 	var textType = /text.*/;
 	if (file.type.match(textType)) {
 		var reader = new FileReader();
@@ -87,7 +87,7 @@ function loadTextArea(file) {
 			textArea.value = reader.result;
 		}
 
-		reader.readAsText(file);  
+		reader.readAsText(file);
 	} else {
 		textArea.value = "File not supported!";
 	}

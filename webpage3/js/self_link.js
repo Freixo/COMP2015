@@ -7,8 +7,8 @@ function SelfLink(node, mouse) {
 	if(mouse) {
 		this.setAnchorPoint(mouse.x, mouse.y);
 	}
-	
-	
+
+
 	this.linkID;
 }
 
@@ -62,7 +62,7 @@ SelfLink.prototype.draw = function(c) {
 	for (var i = 0; i < this.text.length; i ++) {
 		drawText(c, this.text[i], textX, textY-50*i, this.anchorAngle, selectedObject == this);
 	}
-	
+
 	// draw the head of the arrow
 	drawArrow(c, stuff.endX, stuff.endY, stuff.endAngle + Math.PI * 0.4);
 };
