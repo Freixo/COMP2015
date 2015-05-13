@@ -53,21 +53,10 @@ function verifyLex(str) {
 			validTM = "T"; //VALID
 
 			var def = new Definition(
-				["q1", "q2", "q3", "h"],
-				["a","b"],
-				"B",
-				"q1",
-				["h"]
+				states,alphabet,blank,initial,final
 			);
 
-			var trans = [
-				new Transition("q1", "a", "q2", "a", "R"),
-				new Transition("q2", "b", "q3", "b", "R"),
-				new Transition("q3", "a", "q3", "a", "R"),
-				new Transition("q3", "B", "h", "B", "S")
-			]
-
-			tMachine = new TuringMachine(def, trans);
+			tMachine = new TuringMachine(def, transitions);
 			
 
 
