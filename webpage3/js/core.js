@@ -52,14 +52,6 @@ function verifyLex(str) {
 		{
 			validTM = "T"; //VALID
 
-			var def = new Definition(
-				states,alphabet,blank,initial,final
-			);
-
-			tMachine = new TuringMachine(def, transitions);
-			
-
-
 		} else {
 			validTM = "F"; //INVALID
 			var errstr = new String();
@@ -71,6 +63,7 @@ function verifyLex(str) {
 				+ "\", expecting \"" + error_lookaheads[i].join()
 				+ "\"\n" ; alert( errstr );
 		}
+		updateVerifyUI();
 		
 }
 
@@ -1503,9 +1496,10 @@ function verifySemantic(){
 					statesPresent=true;
 				}
 				else if(states.indexOf(semTree[i][1])!=-1){
-					alert("Multiple States with same Name "+semTree[i][1]);
 					validTM = "F";
 					updateVerifyUI();
+					alert("Multiple States with same Name "+semTree[i][1]);
+					
 					return;
 				}
 				break;
@@ -1516,9 +1510,10 @@ function verifySemantic(){
 					alphabetPresent=true;
 				}
 				else if(alphabet.indexOf(semTree[i][1])!=-1){
-					alert("Alphabet Symbol " + semTree[i][1] + " Repetition");
 					validTM = "F";
 					updateVerifyUI();
+					alert("Alphabet Symbol " + semTree[i][1] + " Repetition");
+					
 					return;
 				}
 				break;
@@ -1532,9 +1527,10 @@ function verifySemantic(){
 						blank=semTree[i][1];
 					}
 					else{
-						alert("Blank Symbol " + semTree[i][1] + " not in Alphabet definition");
 						validTM = "F";
 						updateVerifyUI();
+						alert("Blank Symbol " + semTree[i][1] + " not in Alphabet definition");
+						
 						return;
 					}
 				}
@@ -1549,9 +1545,10 @@ function verifySemantic(){
 						blank=semTree[i][1];
 					}
 					else{
-						alert("Initial State " + semTree[i][1] + " not in States definition");
 						validTM = "F";
 						updateVerifyUI();
+						alert("Initial State " + semTree[i][1] + " not in States definition");
+						
 						return;
 					}
 				}
@@ -1575,9 +1572,10 @@ function verifySemantic(){
 							alert("Final State "+semTree[i][1]+" repetition");
 					}
 					else{
-						alert("Final State "+ semTree[i][1] + " not in States definition");
 						validTM = "F";
 						updateVerifyUI();
+						alert("Final State "+ semTree[i][1] + " not in States definition");
+						
 						return;
 					}
 				}
@@ -1596,9 +1594,10 @@ function verifySemantic(){
 						transition.push(semTree[i][1]);
 					}
 					else{
-						alert("State " + semTree[i][1] + " in transition " + counter + " not present in States definition");
 						validTM = "F";
 						updateVerifyUI();
+						alert("State " + semTree[i][1] + " in transition " + counter + " not present in States definition");
+						
 						return;
 					}
 					
@@ -1612,9 +1611,10 @@ function verifySemantic(){
 						transition.push(semTree[i][1]);
 					}
 					else{
-						alert("Symbol " + semTree[i][1] + " in transition " + counter + " not present in Alphabet definition");
 						validTM = "F";
 						updateVerifyUI();
+						alert("Symbol " + semTree[i][1] + " in transition " + counter + " not present in Alphabet definition");
+						
 						return;
 					}
 					
@@ -1628,9 +1628,10 @@ function verifySemantic(){
 						transition.push(semTree[i][1]);
 					}
 					else{
-						alert("State " + semTree[i][1] + " in transition " + counter + " not present in States definition");
 						validTM = "F";
 						updateVerifyUI();
+						alert("State " + semTree[i][1] + " in transition " + counter + " not present in States definition");
+						
 						return;
 					}
 					
@@ -1644,20 +1645,27 @@ function verifySemantic(){
 						transition.push(semTree[i][1]);
 					}
 					else{
-						alert("Symbol " + semTree[i][1] + " in transition " + counter + " not present in Alphabet definition");
 						validTM = "F";
 						updateVerifyUI();
+						alert("Symbol " + semTree[i][1] + " in transition " + counter + " not present in Alphabet definition");
+						
 						return;
 					}
 					
+					i+=2;
+					
+					transition.push(semTree[i][1]);
+					
 					if(transitions.indexOf(transition)!=-1){
-						alert("Transition "+transition+" Repetition");
 						validTM = "F";
 						updateVerifyUI();
+						alert("Transition "+transition+" Repetition");
+						
 						return;
 					}
 					else
-						transitions.push(transition);
+						transitions.push(new Transition(transition[0],transition[1],transition[2],transition[3],transition[4]));
+					
 				}
 				break;
 			case 'input':
@@ -1667,17 +1675,26 @@ function verifySemantic(){
 					for(var j=0;j<inp.length;j++){
 						if(alphabet.indexOf(inp[j])==-1)
 						{
-							alert("Symbol "+inp[j]+" in input "+semTree[i][1]+" not present in Alphabet definition");
 							validTM = 'F';
 							updateVerifyUI();
+							alert("Symbol "+inp[j]+" in input "+semTree[i][1]+" not present in Alphabet definition");
+							
 							return;	
 						}
 					}
 				}
 				break;
 			case 'end':
+				var def = new Definition(
+						states,alphabet,blank,initial,final
+				);
+	
+				tMachine = new TuringMachine(def, transitions);
 				validTM = "T";
 				updateVerifyUI();
+				
+				console.log(tMachine);
+				
 				return;
 			default:
 				break;

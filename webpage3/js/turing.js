@@ -48,6 +48,7 @@ TuringMachine.prototype.next = function() {
 				this.tapePos--;
 				this.curState = this.transitions[i].stateB;
 			} else if(dir == "S") {
+				this.tape = this.tape.replaceAt(this.tapePos, this.transitions[i].output);
 				this.curState = this.transitions[i].stateB;
 			}
 
