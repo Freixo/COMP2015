@@ -1357,9 +1357,10 @@ function __dbg_parsetree( indent, nodes, tree )
 
 
 function verifySemantic(){
+	
 	var state, statesPresent=false, alphabetPresent=false, counter=0;
 	
-	alphabet=[],states=[],blank='',initial="",final=[],transition=[],input=[];
+	alphabet=[],states=[],blank='',initial="",final=[],transitions=[],input=[];
 		
 	for(var i=0; i<semTree.length;i++){
 
@@ -1573,8 +1574,23 @@ function verifySemantic(){
 						
 						return;
 					}
-					else
-						transitions.push(new Transition(transition[0],transition[1],transition[2],transition[3],transition[4]));
+					for(var j=0;j<transitions.length;j++){
+						if(transitions[j]['stateA']===transition[0]&&transitions[j]['input']===transition[1])
+						{
+							console.log(transitions[j]['stateA']);
+							console.log(transitions[j]);
+							console.log(transition[0]);
+							console.log(transition[1]);
+							
+							validTM = "F";
+							updateVerifyUI();
+							alert("Transition "+transition+" has same initial state and symbol as "+transitions[j].toString());
+						
+							return;
+						}
+					}
+					
+					transitions.push(new Transition(transition[0],transition[1],transition[2],transition[3],transition[4]));
 					
 				}
 				break;
