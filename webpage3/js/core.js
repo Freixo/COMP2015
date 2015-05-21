@@ -41,32 +41,6 @@ $( document ).ready(function() {
 
 });
 
-function verifyLex(str) {
-	
-	semTree=[];
-	  var error_offsets = new Array();
-		var error_lookaheads = new Array();
-		var error_count = 0;
-
-		if (( error_count = __parse( str, error_offsets, error_lookaheads ) ) === 0 )
-		{
-			validTM = "T"; //VALID
-
-		} else {
-			validTM = "F"; //INVALID
-			var errstr = new String();
-				for( var i = 0; i < error_count; i++ )
-				errstr += "Parse error in line " +
-				( str.substr( 0, error_offsets[i] ).match( /\n/g ) ?
-				str.substr( 0, error_offsets[i] ).match( /\n/g ).length : 1 )
-				+ " near \"" + str.substr( error_offsets[i] )
-				+ "\", expecting \"" + error_lookaheads[i].join()
-				+ "\"\n" ; alert( errstr );
-		}
-		updateVerifyUI();
-		
-}
-
 function updateVerifyUI() {
 	if (validTM == "T") {
 		$("#lexicalVerification span").first().removeClass('glyphicon-question-sign');

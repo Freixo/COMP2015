@@ -1646,7 +1646,7 @@ function verifySemantic(){
 				validTM = "T";
 				updateVerifyUI();
 				
-				console.log(tMachine);
+				$("#verifyAlert").hide();
 				
 				return;
 			default:
