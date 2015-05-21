@@ -40,6 +40,15 @@ $( document ).ready(function() {
 		updateVerifyUI();
 		$("#inputText").focus();
 	});
+	
+	$("#example1").click(function() {
+		$("#inputText").val("<TM>\n\t<STATES>q0,q1,q2</STATES>\n\t<ALPHABET>1,0,X,B</ALPHABET>\n\t<BLANK>B</BLANK>\n\t<INITSTATE>q0</INITSTATE>\n\t<ENDSTATES>q2</ENDSTATES>\n\t<TRANSITIONS>\n\t\t<TRANSITION>(q0,0)>(q0,1,R)</TRANSITION>\n\t\t<TRANSITION>(q0,1)>(q1,0,S)</TRANSITION>\n\t\t<TRANSITION>(q1,0)>(q2,1,L)</TRANSITION>\n\t</TRANSITIONS>\n\t<INPUT>01010101010</INPUT>\n</TM>");
+		
+		textAreaAdjust($("#inputText").get(0));
+		validTM = "?";
+		updateVerifyUI();
+		$("#inputText").focus();
+	});
 
 	var fileInput = document.getElementById('fileInput');
 

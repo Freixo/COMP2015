@@ -73,8 +73,15 @@
 			Or drag and drop here
 		</div>
 
+		<script>
+		function textAreaAdjust(o) {
+			o.style.height = "1px";
+			o.style.height = (25+o.scrollHeight)+"px";
+		}
+		</script>
+		<button id="example1" class="btn btn-info pull-left"> Example 1 </button>
 		<button id="clearText" class="btn btn-default pull-right"> Clear </button>
-		<textarea id="inputText" class="form-control" rows="9" placeholder="Write TM code here."></textarea>
+		<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden" id="inputText" class="form-control" rows="9" placeholder="Write TM code here."></textarea>
 
 		<button id="lexicalVerification" class="btn btn-primary pull-center"> Verify <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></button>
 
