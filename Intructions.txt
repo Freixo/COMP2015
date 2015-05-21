@@ -1,0 +1,5 @@
+Para correr:
+abrir website3/index.html
+
+Para testar:
+inserir grammar/testinput.txt no campo de texto

@@ -1,2 +1,0 @@
-Basta alterar a funcao "verifyLex()" no ficheiro "js/core.js"
-para completar.

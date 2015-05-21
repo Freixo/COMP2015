@@ -1,30 +1,10 @@
-/*
-	Default driver template for JS/CC generated parsers for Mozilla/Rhino
-	
-	WARNING: Do not use for parsers that should run as browser-based JavaScript!
-			 Use driver_web.js_ instead!
-	
-	Features:
-	- Parser trace messages
-	- Step-by-step parsing
-	- Integrated panic-mode error recovery
-	- Pseudo-graphical parse tree generation
-	
-	Written 2007 by Jan Max Meyer, J.M.K S.F. Software Technologies
-        Modified 2007 from driver.js_ to support Mozilla/Rhino
-           by Louis P.Santillan <lpsantil@gmail.com>
-	
-	This is in the public domain.
-*/
-
-
-var _dbg_withparsetree	= false;
+var _dbg_withparsetree	= true;
 var _dbg_withtrace		= false;
 var _dbg_withstepbystep	= false;
 
 function __dbg_print( text )
 {
-	print( text );
+	//print( text );
 }
 
 function __dbg_wait()
@@ -1361,21 +1341,273 @@ switch( act )
 
 function __dbg_parsetree( indent, nodes, tree )
 {
-	var str = new String();
+	var str;
+	
 	for( var i = 0; i < tree.length; i++ )
 	{
-		str = "";
-		for( var j = indent; j > 0; j-- )
-			str += "\t";
-		
-		str += nodes[ tree[i] ].sym;
+		str = nodes[ tree[i] ].sym;
 		if( nodes[ tree[i] ].att != "" )
-			str += " >" + nodes[ tree[i] ].att + "<" ;
+			semTree.push([str,nodes[ tree[i] ].att]);
 			
-		__dbg_print( str );
 		if( nodes[ tree[i] ].child.length > 0 )
 			__dbg_parsetree( indent + 1, nodes, nodes[ tree[i] ].child );
 	}
 }
 
 
+
+function verifySemantic(){
+	var state, statesPresent=false, alphabetPresent=false, counter=0;
+	
+	alphabet=[],states=[],blank='',initial="",final=[],transition=[],input=[];
+		
+	for(var i=0; i<semTree.length;i++){
+
+		if(semTree[i][0] ==='STATESTART'){
+			state='states';
+			statesPresent=true;
+			continue;
+		}
+		else if(semTree[i][0] ==='ALPHABETSTART'){
+			state='alphabet';
+			alphabetPresent=true;
+			continue;
+		}
+		else if(semTree[i][0] ==='BLANKSTART'){
+			state='blank';
+			continue;
+		}
+		else if(semTree[i][0] === 'INITSTATESTART'){
+			state='initial';
+			continue;
+		}
+		else if(semTree[i][0] === 'ENDSTATESTART'){
+			state='final';
+			continue;
+		}
+		else if(semTree[i][0] === 'TRANSITIONSTART'){
+			state='transition';
+			continue;
+		}	
+		else if(semTree[i][0] === 'INPUTSTART'){
+			state='input';
+			continue;		
+		}
+		else if(semTree[i][0] === 'INPUTEND'){
+			state='end';
+			continue;
+		}
+		
+		switch(state){
+			case 'states':
+				if(semTree[i][0] === 'STRING' && (states.indexOf(semTree[i][1])==-1))
+				{
+					states.push(semTree[i][1]);
+					statesPresent=true;
+				}
+				else if(states.indexOf(semTree[i][1])!=-1){
+					validTM = "F";
+					updateVerifyUI();
+					alert("Multiple States with same Name "+semTree[i][1]);
+					
+					return;
+				}
+				break;
+			case 'alphabet':
+				if(semTree[i][0] === 'CHAR' && (alphabet.indexOf(semTree[i][1])==-1))
+				{
+					alphabet.push(semTree[i][1]);
+					alphabetPresent=true;
+				}
+				else if(alphabet.indexOf(semTree[i][1])!=-1){
+					validTM = "F";
+					updateVerifyUI();
+					alert("Alphabet Symbol " + semTree[i][1] + " Repetition");
+					
+					return;
+				}
+				break;
+			case 'blank':
+				if(semTree[i][0] === 'CHAR')
+				{
+					if((alphabet.indexOf(semTree[i][1])!=-1) && alphabetPresent)
+						blank=semTree[i][1];
+					else if(!alphabetPresent){
+						alphabet.push(semTree[i][1]);
+						blank=semTree[i][1];
+					}
+					else{
+						validTM = "F";
+						updateVerifyUI();
+						alert("Blank Symbol " + semTree[i][1] + " not in Alphabet definition");
+						
+						return;
+					}
+				}
+				break;
+			case 'initial':
+				if(semTree[i][0] === 'STRING')
+				{
+					if((states.indexOf(semTree[i][1]))!=-1 && statesPresent)
+						initial=semTree[i][1];
+					else if(!statesPresent){
+						states.push(semTree[i][1]);
+						blank=semTree[i][1];
+					}
+					else{
+						validTM = "F";
+						updateVerifyUI();
+						alert("Initial State " + semTree[i][1] + " not in States definition");
+						
+						return;
+					}
+				}
+				break;
+			case 'final':
+				if(semTree[i][0] === 'STRING')
+				{
+					if((states.indexOf(semTree[i][1])!=-1) && statesPresent)
+						final.push(semTree[i][1]);
+					else if(!statesPresent){
+						if(states.indexOf(semTree[i][1])==-1){
+							states.push(semTree[i][1]);
+							final.push(semTree[i][1]);
+						}
+						else{
+							alert("Final State "+semTree[i][1]+" repetition");
+						}
+						
+					}
+					else if(states.indexOf(semTree[i][1])==-1){
+							alert("Final State "+semTree[i][1]+" repetition");
+					}
+					else{
+						validTM = "F";
+						updateVerifyUI();
+						alert("Final State "+ semTree[i][1] + " not in States definition");
+						
+						return;
+					}
+				}
+				break;
+			case 'transition':
+				if(semTree[i][0] === 'STRING')
+				{
+
+					var transition=[];
+					counter++;
+					if((states.indexOf(semTree[i][1])!=-1) && statesPresent)
+						transition.push(semTree[i][1]);
+					else if(!statesPresent){
+						if((states.indexOf(semTree[i][1])==-1))
+							states.push(semTree[i][1]);
+						transition.push(semTree[i][1]);
+					}
+					else{
+						validTM = "F";
+						updateVerifyUI();
+						alert("State " + semTree[i][1] + " in transition " + counter + " not present in States definition");
+						
+						return;
+					}
+					
+					i+=2;
+					
+					if((alphabet.indexOf(semTree[i][1])!=-1) && alphabetPresent)
+						transition.push(semTree[i][1]);
+					else if(!alphabetPresent){
+						if(alphabet.indexOf(semTree[i][1])==-1)
+							alphabet.push(semTree[i][1]);
+						transition.push(semTree[i][1]);
+					}
+					else{
+						validTM = "F";
+						updateVerifyUI();
+						alert("Symbol " + semTree[i][1] + " in transition " + counter + " not present in Alphabet definition");
+						
+						return;
+					}
+					
+					i+=4;
+					
+					if((states.indexOf(semTree[i][1])!=-1) && statesPresent)
+						transition.push(semTree[i][1]);
+					else if(!statesPresent){
+						if((states.indexOf(semTree[i][1])==-1))
+							states.push(semTree[i][1]);
+						transition.push(semTree[i][1]);
+					}
+					else{
+						validTM = "F";
+						updateVerifyUI();
+						alert("State " + semTree[i][1] + " in transition " + counter + " not present in States definition");
+						
+						return;
+					}
+					
+					i+=2;
+
+					if((alphabet.indexOf(semTree[i][1])!=-1) && alphabetPresent)
+						transition.push(semTree[i][1]);
+					else if(!alphabetPresent){
+						if(alphabet.indexOf(semTree[i][1])==-1)
+							alphabet.push(semTree[i][1]);
+						transition.push(semTree[i][1]);
+					}
+					else{
+						validTM = "F";
+						updateVerifyUI();
+						alert("Symbol " + semTree[i][1] + " in transition " + counter + " not present in Alphabet definition");
+						
+						return;
+					}
+					
+					i+=2;
+					
+					transition.push(semTree[i][1]);
+					
+					if(transitions.indexOf(transition)!=-1){
+						validTM = "F";
+						updateVerifyUI();
+						alert("Transition "+transition+" Repetition");
+						
+						return;
+					}
+					else
+						transitions.push(new Transition(transition[0],transition[1],transition[2],transition[3],transition[4]));
+					
+				}
+				break;
+			case 'input':
+				if(semTree[i][0] === 'STRING')
+				{
+					var inp = semTree[i][1].split("");
+					for(var j=0;j<inp.length;j++){
+						if(alphabet.indexOf(inp[j])==-1)
+						{
+							validTM = 'F';
+							updateVerifyUI();
+							alert("Symbol "+inp[j]+" in input "+semTree[i][1]+" not present in Alphabet definition");
+							
+							return;	
+						}
+					}
+				}
+				break;
+			case 'end':
+				var def = new Definition(
+						states,alphabet,blank,initial,final
+				);
+	
+				tMachine = new TuringMachine(def, transitions);
+				validTM = "T";
+				updateVerifyUI();
+				
+				console.log(tMachine);
+				
+				return;
+			default:
+				break;
+		}
+	}
+}
