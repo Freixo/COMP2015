@@ -2,6 +2,33 @@ var _dbg_withparsetree	= true;
 var _dbg_withtrace		= false;
 var _dbg_withstepbystep	= false;
 
+function verifyLex(str) {
+	
+	semTree=[];
+	  var error_offsets = new Array();
+		var error_lookaheads = new Array();
+		var error_count = 0;
+
+		if (( error_count = __parse( str, error_offsets, error_lookaheads ) ) === 0 )
+		{
+			validTM = "T"; //VALID
+
+		} else {
+			validTM = "F"; //INVALID
+			var errstr = new String();
+				for( var i = 0; i < error_count; i++ )
+				errstr += "Parse error in line " +
+				( str.substr( 0, error_offsets[i] ).match( /\n/g ) ?
+				str.substr( 0, error_offsets[i] ).match( /\n/g ).length : 1 )
+				+ " near \"" + str.substr( error_offsets[i] )
+				+ "\", expecting \"" + error_lookaheads[i].join()
+				+ "\"\n" ; parserVerifyAlert( errstr );
+		}
+		updateVerifyUI();
+		
+}
+
+
 function __dbg_print( text )
 {
 	//print( text );
@@ -1409,7 +1436,7 @@ function verifySemantic(){
 				else if(states.indexOf(semTree[i][1])!=-1){
 					validTM = "F";
 					updateVerifyUI();
-					alert("Multiple States with same Name "+semTree[i][1]);
+					parserVerifyAlert("Multiple States with same Name "+semTree[i][1]);
 					
 					return;
 				}
@@ -1423,7 +1450,7 @@ function verifySemantic(){
 				else if(alphabet.indexOf(semTree[i][1])!=-1){
 					validTM = "F";
 					updateVerifyUI();
-					alert("Alphabet Symbol " + semTree[i][1] + " Repetition");
+					parserVerifyAlert("Alphabet Symbol " + semTree[i][1] + " Repetition");
 					
 					return;
 				}
@@ -1440,7 +1467,7 @@ function verifySemantic(){
 					else{
 						validTM = "F";
 						updateVerifyUI();
-						alert("Blank Symbol " + semTree[i][1] + " not in Alphabet definition");
+						parserVerifyAlert("Blank Symbol " + semTree[i][1] + " not in Alphabet definition");
 						
 						return;
 					}
@@ -1458,7 +1485,7 @@ function verifySemantic(){
 					else{
 						validTM = "F";
 						updateVerifyUI();
-						alert("Initial State " + semTree[i][1] + " not in States definition");
+						parserVerifyAlert("Initial State " + semTree[i][1] + " not in States definition");
 						
 						return;
 					}
@@ -1475,17 +1502,17 @@ function verifySemantic(){
 							final.push(semTree[i][1]);
 						}
 						else{
-							alert("Final State "+semTree[i][1]+" repetition");
+							parserVerifyAlert("Final State "+semTree[i][1]+" repetition");
 						}
 						
 					}
 					else if(states.indexOf(semTree[i][1])==-1){
-							alert("Final State "+semTree[i][1]+" repetition");
+							parserVerifyAlert("Final State "+semTree[i][1]+" repetition");
 					}
 					else{
 						validTM = "F";
 						updateVerifyUI();
-						alert("Final State "+ semTree[i][1] + " not in States definition");
+						parserVerifyAlert("Final State "+ semTree[i][1] + " not in States definition");
 						
 						return;
 					}
@@ -1507,7 +1534,7 @@ function verifySemantic(){
 					else{
 						validTM = "F";
 						updateVerifyUI();
-						alert("State " + semTree[i][1] + " in transition " + counter + " not present in States definition");
+						parserVerifyAlert("State " + semTree[i][1] + " in transition " + counter + " not present in States definition");
 						
 						return;
 					}
@@ -1524,7 +1551,7 @@ function verifySemantic(){
 					else{
 						validTM = "F";
 						updateVerifyUI();
-						alert("Symbol " + semTree[i][1] + " in transition " + counter + " not present in Alphabet definition");
+						parserVerifyAlert("Symbol " + semTree[i][1] + " in transition " + counter + " not present in Alphabet definition");
 						
 						return;
 					}
@@ -1541,7 +1568,7 @@ function verifySemantic(){
 					else{
 						validTM = "F";
 						updateVerifyUI();
-						alert("State " + semTree[i][1] + " in transition " + counter + " not present in States definition");
+						parserVerifyAlert("State " + semTree[i][1] + " in transition " + counter + " not present in States definition");
 						
 						return;
 					}
@@ -1558,7 +1585,7 @@ function verifySemantic(){
 					else{
 						validTM = "F";
 						updateVerifyUI();
-						alert("Symbol " + semTree[i][1] + " in transition " + counter + " not present in Alphabet definition");
+						parserVerifyAlert("Symbol " + semTree[i][1] + " in transition " + counter + " not present in Alphabet definition");
 						
 						return;
 					}
@@ -1570,7 +1597,7 @@ function verifySemantic(){
 					if(transitions.indexOf(transition)!=-1){
 						validTM = "F";
 						updateVerifyUI();
-						alert("Transition "+transition+" Repetition");
+						parserVerifyAlert("Transition "+transition+" Repetition");
 						
 						return;
 					}
@@ -1584,7 +1611,7 @@ function verifySemantic(){
 							
 							validTM = "F";
 							updateVerifyUI();
-							alert("Transition "+transition+" has same initial state and symbol as "+transitions[j].toString());
+							parserVerifyAlert("Transition "+transition+" has same initial state and symbol as "+transitions[j].toString());
 						
 							return;
 						}
@@ -1603,7 +1630,7 @@ function verifySemantic(){
 						{
 							validTM = 'F';
 							updateVerifyUI();
-							alert("Symbol "+inp[j]+" in input "+semTree[i][1]+" not present in Alphabet definition");
+							parserVerifyAlert("Symbol "+inp[j]+" in input "+semTree[i][1]+" not present in Alphabet definition");
 							
 							return;	
 						}
@@ -1626,4 +1653,14 @@ function verifySemantic(){
 				break;
 		}
 	}
+}
+
+function parserVerifyAlert( msg ) {
+
+	$("#verifyAlert").removeClass("alert-warning");
+	$("#verifyAlert").addClass("alert-danger");
+	$("#verifyAlert").last().text(msg);
+
+	$("#verifyAlert").show(300);
+
 }
