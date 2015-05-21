@@ -227,6 +227,10 @@ Transition.prototype.isSame = function(transition) {
 	return this.stateA == transition.stateA && this.stateB == transition.stateB;
 }
 
+Transition.prototype.toString = function(transition) {
+	return this.stateA+", "+this.input+", "+this.stateB+", "+this.output+", "+this.direction;
+}
+
 function initializeTape() {
 	$("#curState").text(tMachine.curState);
 
