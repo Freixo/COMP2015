@@ -33,12 +33,9 @@ $( document ).ready(function() {
 			verifySemantic();
 
 		if (validTM == "T") {
-			$("#verifyAlert").hide();
-			
+			$("#verifyAlert").hide();			
 		}
-
 	});
-
 });
 
 function updateVerifyUI() {

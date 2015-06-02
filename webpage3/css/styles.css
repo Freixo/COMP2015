@@ -148,9 +148,39 @@ canvas {
 	filter: alpha(opacity=0);
 }
 
+#drop-zone
+{
+	display: none;
+}
+
+#textMod
+{
+	display: none;
+}
+
+#xmlMod
+{
+	display: none;
+}
+
+#modeSelection
+{
+
+}
+
+.explanation
+{
+	font: bold italic 20px Georgia, serif;
+	text-align: left;
+	margin-bottom: 20px;
+	display: none;
+}
+
 #lexicalVerification {
 	font: bold italic 40px Georgia, serif;
-	margin-bottom:50px;
+	margin-top: 25px;
+	margin-bottom: 50px;
+	display: none;
 }
 
 #inputText {

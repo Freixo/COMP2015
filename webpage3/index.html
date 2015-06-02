@@ -8,13 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>Turing Machine Simulator</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-	  <!-- Custom styles for this template -->
+	<!-- Custom styles for this template -->
     <link href="css/styles.css" rel="stylesheet">
 
 </head>
@@ -63,26 +62,61 @@
         </div>
         <!-- /.row -->
 
-
-		<!-- Drop Zone -->
-		<div class="row upload-drop-zone pull-center" id="drop-zone">
+		<div id="modeSelection">
+			<div class="explanation">
+				1 - Please select preferred input mode:
+			</div>
+			<div class="modeSelectionBtns">
+				<button id="fileMode" class="btn btn-default pull-left"> File Input Mode </button>
+				<button id="xmlMode" class="btn btn-default center"> XML Input Mode </button>
+				<button id="textMode" class="btn btn-default pull-right"> Text Input Mode </button>
+			</div>
+		</div>
+		
+		<!-- Drop file or upload -->
+		<div class="explanation">
+			2 - Now drop a file here:
+		</div>
+		<div class="row upload-drop-zone pull-center" id="drop-zone">			
 			<div id="fUp" class="fileUpload btn btn-primary">
 				<input type="file" class="upload" id="fileInput"><span>Select File</span></input>
 			</div>
 			<br>
 			Or drag and drop here
 		</div>
-
 		<script>
 		function textAreaAdjust(o) {
-			o.style.height = "1px";
-			o.style.height = (25+o.scrollHeight)+"px";
-		}
+				o.style.height = "1px";
+				o.style.height = (25+o.scrollHeight)+"px";
+			}
 		</script>
-		<button id="example1" class="btn btn-info pull-left"> Example 1 </button>
-		<button id="clearText" class="btn btn-default pull-right"> Clear </button>
-		<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden" id="inputText" class="form-control" rows="9" placeholder="Write TM code here."></textarea>
-
+		
+		<!-- Text boxes mode -->
+		<div class="explanation">
+			2 - Now fill this spaces:
+		</div>
+		<div id="textMod">
+			
+			<button id="example1" class="btn btn-info pull-left">Load Example</button>
+			<button id="clearText" class="btn btn-default pull-right"> Clear </button>
+			<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden" id="inputText" class="form-control" rows="9" placeholder="Write TM code here."></textarea>
+		</div>
+		
+		<!-- XML Mode -->
+		<div class="explanation">
+			2 - Now write or copy your XML code here:
+		</div>
+		<div id="xmlMod">
+			
+			<button id="example1" class="btn btn-info pull-left">Load Example</button>
+			<button id="clearText" class="btn btn-default pull-right"> Clear </button>
+			<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden" id="inputText" class="form-control" rows="9" placeholder="Write TM code here."></textarea>
+		</div>
+		
+		<!-- Verification Button -->
+		<div class="explanation">
+			3 -	Then verify it:
+		</div>
 		<button id="lexicalVerification" class="btn btn-primary pull-center"> Verify <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></button>
 
 
@@ -172,8 +206,8 @@
 	<script src="js/upload.js"></script>
 	<script src="js/core.js"></script>
 	<script src="js/parser.js"></script>
-
-
+	<script type="text/javascript" src="./js/modeSelect.js"></script>
 </body>
+	
 
 </html>
