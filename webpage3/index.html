@@ -63,7 +63,7 @@
         <!-- /.row -->
 
 		<div id="modeSelection">
-			<div class="explanation">
+			<div class="explanation1st">
 				1 - Please select preferred input mode:
 			</div>
 			<div class="modeSelectionBtns">
@@ -91,6 +91,16 @@
 			}
 		</script>
 		
+		<!-- XML Mode -->
+		<div class="explanation">
+			2 - Now write or copy your XML code here:
+		</div>
+		<div id="xmlMod">			
+			<button id="example1" class="btn btn-info pull-left">Load Example</button>
+			<button id="clearText" class="btn btn-default pull-right"> Clear </button>
+			<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden" id="inputText" class="form-control" rows="9" placeholder="Write TM code here."></textarea>
+		</div>
+		
 		<!-- Text boxes mode -->
 		<div class="explanation">
 			2 - Now fill this spaces:
@@ -100,18 +110,7 @@
 			<button id="example1" class="btn btn-info pull-left">Load Example</button>
 			<button id="clearText" class="btn btn-default pull-right"> Clear </button>
 			<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden" id="inputText" class="form-control" rows="9" placeholder="Write TM code here."></textarea>
-		</div>
-		
-		<!-- XML Mode -->
-		<div class="explanation">
-			2 - Now write or copy your XML code here:
-		</div>
-		<div id="xmlMod">
-			
-			<button id="example1" class="btn btn-info pull-left">Load Example</button>
-			<button id="clearText" class="btn btn-default pull-right"> Clear </button>
-			<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden" id="inputText" class="form-control" rows="9" placeholder="Write TM code here."></textarea>
-		</div>
+		</div>	
 		
 		<!-- Verification Button -->
 		<div class="explanation">

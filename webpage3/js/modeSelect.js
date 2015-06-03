@@ -11,6 +11,8 @@ $(document).ready(function(){
 		
 		$("#textMod").hide(400);
 		$("#xmlMod").hide(400);
+		
+		$("#drop-zone").closest(".explanation").show(800);
 		$("#drop-zone").show(800);
 		
 		$("#lexicalVerification").show(800);
@@ -25,6 +27,7 @@ $(document).ready(function(){
 		
 		$("#textMod").hide(400);
 		$("#drop-zone").hide(400);
+		
 		$("#xmlMod").closest(".explanation").show(800);
 		$("#xmlMod").show(800);
 		
@@ -40,6 +43,8 @@ $(document).ready(function(){
 		
 		$("#drop-zone").hide(400);
 		$("#xmlMod").hide(400);
+		
+		$("#textMod").closest(".explanation").show(800);	
 		$("#textMod").show(800);
 		
 		$("#lexicalVerification").show(800);

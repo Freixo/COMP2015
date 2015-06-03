@@ -168,6 +168,13 @@ canvas {
 
 }
 
+.explanation1st
+{
+	font: bold italic 20px Georgia, serif;
+	text-align: left;
+	margin-bottom: 20px;
+}
+
 .explanation
 {
 	font: bold italic 20px Georgia, serif;
