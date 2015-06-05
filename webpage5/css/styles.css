@@ -5,6 +5,7 @@ html {
 	min-height: 100%;
 	
 }
+
 body {
 	padding-top: 70px;
 	margin-bottom: 60px;
@@ -14,6 +15,16 @@ body {
 	margin: 0 30px 100px 30px;
 	font: bold italic 10px Georgia, serif;
 }
+
+
+.navbar {
+	font: bold italic 20px Verdana;
+}
+
+::-webkit-scrollbar { 
+  width: 0px!important;
+} 
+
 .footer {
 	position: absolute;
 	bottom: 0;
@@ -168,6 +179,7 @@ canvas {
     resize: vertical;
 	font: bold 20px Courier, serif;
 	margin-bottom:10px;
+	color:#000;
 }
 
 #dataControl {

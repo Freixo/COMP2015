@@ -38,7 +38,7 @@ $( document ).ready(function() {
 		}
 
 	});
-
+	
 });
 
 function updateVerifyUI() {
@@ -49,6 +49,9 @@ function updateVerifyUI() {
 		$("#lexicalVerification").removeClass('btn-primary');
 		$("#lexicalVerification").removeClass('btn-danger');
 		$("#lexicalVerification").addClass('btn-success');
+		if ($("#inputText").val() != "") {
+			$("#inputText").css("background-color", "rgba(92,184,92, 0.5)");
+		}
 		
 		$("#tmcontrolpanel").show();
 		
@@ -65,6 +68,9 @@ function updateVerifyUI() {
 		$("#lexicalVerification").removeClass('btn-primary');
 		$("#lexicalVerification").removeClass('btn-success');
 		$("#lexicalVerification").addClass('btn-danger');
+		if ($("#inputText").val() != "") {
+			$("#inputText").css("background-color", "rgba(201,48,44, 0.5)");
+		}
 		
 		$("#tmcontrolpanel").hide();
 		
@@ -75,6 +81,7 @@ function updateVerifyUI() {
 		$("#lexicalVerification").removeClass('btn-danger');
 		$("#lexicalVerification").removeClass('btn-success');
 		$("#lexicalVerification").addClass('btn-primary');
+		$("#inputText").css("background-color", "rgba(255,255,255, 1)");
 		
 		$("#tmcontrolpanel").hide();
 	}

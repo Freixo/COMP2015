@@ -5,10 +5,10 @@ $( document ).ready(function() {
 		tmDelete();
 	
 		$("#texModeArea").show(200);
-		$("#uiMode").removeClass("btn-primary");
-		$("#uiMode").addClass("btn-default");
-		$("#textMode").removeClass("btn-default");
-		$("#textMode").addClass("btn-primary");
+		$("#uiMode").removeClass("btn-success");
+		$("#uiMode").addClass("btn-primary");
+		$("#textMode").removeClass("btn-primary");
+		$("#textMode").addClass("btn-success");
 		
 		
 		$("#step").text("Step 2: Input TM and Verifiy it.");
@@ -20,10 +20,10 @@ $( document ).ready(function() {
 		tmDelete();
 	
 		$("#texModeArea").hide();
-		$("#uiMode").removeClass("btn-default");
-		$("#uiMode").addClass("btn-primary");
-		$("#textMode").removeClass("btn-primary");
-		$("#textMode").addClass("btn-default");
+		$("#uiMode").removeClass("btn-primary");
+		$("#uiMode").addClass("btn-success");
+		$("#textMode").removeClass("btn-success");
+		$("#textMode").addClass("btn-primary");
 		
 		
 		$("#step").text("Step 2: Input TM and Verifiy it.");
