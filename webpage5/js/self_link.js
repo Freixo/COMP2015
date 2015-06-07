@@ -60,7 +60,7 @@ SelfLink.prototype.draw = function(c) {
 	var textX = stuff.circleX + stuff.circleRadius * Math.cos(this.anchorAngle);
 	var textY = stuff.circleY + stuff.circleRadius * Math.sin(this.anchorAngle);
 	for (var i = 0; i < this.text.length; i ++) {
-		drawText(c, this.text[i], textX, textY-50*i, this.anchorAngle, selectedObject == this);
+		drawText(c, this.text[i], textX, textY-50*i, this.anchorAngle, false);
 	}
 
 	// draw the head of the arrow

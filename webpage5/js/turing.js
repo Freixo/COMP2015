@@ -268,36 +268,36 @@ function tmStart() {
 
 	if (validTM != "T") {
 		if (validTM == "?") {
-			$("#verifyAlert").removeClass("alert-danger");
-			$("#verifyAlert").addClass("alert-warning");
-			$("#verifyAlert").last().text("You must verify the Turing Machine Code first.");
+			$("#cpAlert").removeClass("alert-danger");
+			$("#cpAlert").addClass("alert-warning");
+			$("#cpAlert").last().text("You must verify the Turing Machine Code first.");
 		} else if (validTM == "F") {
-			$("#verifyAlert").removeClass("alert-warning");
-			$("#verifyAlert").addClass("alert-danger");
-			$("#verifyAlert").last().text("Invalid Turing machine code.");
+			$("#cpAlert").removeClass("alert-warning");
+			$("#cpAlert").addClass("alert-danger");
+			$("#cpAlert").last().text("Invalid Turing machine code.");
 		}
-		$("#verifyAlert").show(300);
+		$("#cpAlert").show(300);
 		return;
 	}
 
 	var pattern = "^([" + tMachine.definition.alphabet.join("") + "]+)$";
 	if ($("#tminput").val() == "") {
-		$("#verifyAlert").removeClass("alert-danger");
-		$("#verifyAlert").addClass("alert-warning");
-		$("#verifyAlert").last().text("You must write the TM Input.");
+		$("#cpAlert").removeClass("alert-danger");
+		$("#cpAlert").addClass("alert-warning");
+		$("#cpAlert").last().text("You must write the TM Input.");
 		$("#tminput").focus();
-		$("#verifyAlert").show(300);
+		$("#cpAlert").show(300);
 		return;
 	} else if($("#tminput").val().search(pattern) == -1) {
-		$("#verifyAlert").removeClass("alert-warning");
-		$("#verifyAlert").addClass("alert-danger");
-		$("#verifyAlert").last().text("Invalid Input.");
+		$("#cpAlert").removeClass("alert-warning");
+		$("#cpAlert").addClass("alert-danger");
+		$("#cpAlert").last().text("Invalid Input.");
 		$("#tminput").focus();
-		$("#verifyAlert").show(300);
+		$("#cpAlert").show(300);
 		return;
 	}
 
-	$("#verifyAlert").hide();
+	$("#cpAlert").hide();
 
 	tMachine.setInput($("#tminput").val());
 
@@ -339,22 +339,22 @@ function tmReset() {
 
 	var pattern = "^([" + tMachine.definition.alphabet.join("") + "]+)$";
 	if ($("#tminput").val() == "") {
-		$("#verifyAlert").removeClass("alert-danger");
-		$("#verifyAlert").addClass("alert-warning");
-		$("#verifyAlert").last().text("You must write the TM Input.");
+		$("#cpAlert").removeClass("alert-danger");
+		$("#cpAlert").addClass("alert-warning");
+		$("#cpAlert").last().text("You must write the TM Input.");
 		$("#tminput").focus();
-		$("#verifyAlert").show(300);
+		$("#cpAlert").show(300);
 		return;
 	} else if($("#tminput").val().search(pattern) == -1) {
-		$("#verifyAlert").removeClass("alert-warning");
-		$("#verifyAlert").addClass("alert-danger");
-		$("#verifyAlert").last().text("Invalid Input.");
+		$("#cpAlert").removeClass("alert-warning");
+		$("#cpAlert").addClass("alert-danger");
+		$("#cpAlert").last().text("Invalid Input.");
 		$("#tminput").focus();
-		$("#verifyAlert").show(300);
+		$("#cpAlert").show(300);
 		return;
 	}
 
-	$("#verifyAlert").hide();
+	$("#cpAlert").hide();
 
 	tMachine.input = $("#tminput").val();
 

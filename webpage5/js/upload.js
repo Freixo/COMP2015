@@ -42,12 +42,17 @@ $( document ).ready(function() {
 	});
 	
 	$("#example1").click(function() {
-		$("#inputText").val("<TM>\n\t<STATES>q0,q1,q2</STATES>\n\t<ALPHABET>1,0,X,B</ALPHABET>\n\t<BLANK>B</BLANK>\n\t<INITSTATE>q0</INITSTATE>\n\t<ENDSTATES>q2</ENDSTATES>\n\t<TRANSITIONS>\n\t\t<TRANSITION>(q0,0)>(q0,1,R)</TRANSITION>\n\t\t<TRANSITION>(q0,1)>(q1,0,S)</TRANSITION>\n\t\t<TRANSITION>(q1,0)>(q2,1,L)</TRANSITION>\n\t</TRANSITIONS>\n\t<INPUT>01010101010</INPUT>\n</TM>");
+		$("#inputText").val("<TM>\n\t<STATES>q1,q2,q3,hf</STATES>\n\t<ALPHABET>a,b,B</ALPHABET>\n\t<BLANK>B</BLANK>\n\t<INITSTATE>q1</INITSTATE>\n\t<ENDSTATES>hf</ENDSTATES>\n\t<TRANSITIONS>\n\t\t<TRANSITION>(q1,a)>(q2,a,R)</TRANSITION>\n\t\t<TRANSITION>(q2,b)>(q3,b,R)</TRANSITION>\n\t\t<TRANSITION>(q3,a)>(q3,a,R)</TRANSITION>\n\t\t<TRANSITION>(q3,B)>(hf,B,S)</TRANSITION>\n\t</TRANSITIONS>\n\t<INPUT>abaa</INPUT>\n</TM>");
 		
 		textAreaAdjust($("#inputText").get(0));
 		validTM = "?";
 		updateVerifyUI();
 		$("#inputText").focus();
+		
+		$("html, body").animate({ scrollTop: $("#lexicalVerification").offset().top - 150 }, 'slow', function(){
+			page.off("scroll mousedown wheel DOMMouseScroll mousewheel keyup touchmove");
+		});
+		
 	});
 
 	var fileInput = document.getElementById('fileInput');

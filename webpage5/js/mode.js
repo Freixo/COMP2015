@@ -11,7 +11,7 @@ $( document ).ready(function() {
 		$("#textMode").addClass("btn-success");
 		
 		
-		$("#step").text("Step 2: Input TM and Verifiy it.");
+		$("#step").html("<b>Step 2:</b> Input TM and Verifiy it.");
 	});
 	
 	
@@ -26,7 +26,7 @@ $( document ).ready(function() {
 		$("#textMode").addClass("btn-primary");
 		
 		
-		$("#step").text("Step 2: Input TM and Verifiy it.");
+		$("#step").html("<b>Step 2:</b> Input TM and Verifiy it.");
 	});
 	
 

@@ -102,14 +102,14 @@ Link.prototype.draw = function(c) {
 		var textX = stuff.circleX + stuff.circleRadius * Math.cos(textAngle);
 		var textY = stuff.circleY + stuff.circleRadius * Math.sin(textAngle);
 		for (var i = 0; i < this.text.length; i ++) {
-			drawText(c, this.text[i], textX, textY-50*i, textAngle, selectedObject == this);
+			drawText(c, this.text[i], textX, textY-50*i, textAngle, false);
 		}
 	} else {
 		var textX = (stuff.startX + stuff.endX) / 2;
 		var textY = (stuff.startY + stuff.endY) / 2;
 		var textAngle = Math.atan2(stuff.endX - stuff.startX, stuff.startY - stuff.endY);
 		for (var i = 0; i < this.text.length; i ++) {
-			drawText(c, this.text[i], textX, textY-50*i, textAngle + this.lineAngleAdjust, selectedObject == this);
+			drawText(c, this.text[i], textX, textY-50*i, textAngle + this.lineAngleAdjust, false);
 		}
 	}
 };

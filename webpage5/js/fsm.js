@@ -176,9 +176,10 @@ window.onload = function() {
 		movingObject = false;
 		originalClick = mouse;
 
+		
 		if(selectedObject != null) {
 			if(shift && selectedObject instanceof Node) {
-				currentLink = new SelfLink(selectedObject, mouse);
+				//currentLink = new SelfLink(selectedObject, mouse);
 			} else {
 				movingObject = true;
 				deltaMouseX = deltaMouseY = 0;
@@ -187,9 +188,9 @@ window.onload = function() {
 				}
 			}
 			resetCaret();
-		} else if(shift) {
+		}/* else if(shift) {
 			currentLink = new TemporaryLink(mouse, mouse);
-		}
+		}*/
 
 		draw();
 
@@ -202,7 +203,7 @@ window.onload = function() {
 			return true;
 		}
 	};
-
+/*
 	canvas.ondblclick = function(e) {
 		var mouse = crossBrowserRelativeMousePos(e);
 		selectedObject = selectObject(mouse.x, mouse.y);
@@ -217,7 +218,7 @@ window.onload = function() {
 			draw();
 		}
 	};
-
+*/
 	canvas.onmousemove = function(e) {
 		var mouse = crossBrowserRelativeMousePos(e);
 
@@ -280,15 +281,15 @@ document.onkeydown = function(e) {
 		// don't read keystrokes when other things have focus
 		return true;
 	} else if(key == 8) { // backspace key
-		if(selectedObject != null && 'text' in selectedObject) {
+		/*if(selectedObject != null && 'text' in selectedObject) {
 			selectedObject.text = selectedObject.text.substr(0, selectedObject.text.length - 1);
 			resetCaret();
 			draw();
-		}
+		}*/
 
 		// backspace is a shortcut for the back button, but do NOT want to change pages
 		return false;
-	} else if(key == 46) { // delete key
+	}/* else if(key == 46) { // delete key
 		if(selectedObject != null) {
 			for(var i = 0; i < nodes.length; i++) {
 				if(nodes[i] == selectedObject) {
@@ -303,7 +304,7 @@ document.onkeydown = function(e) {
 			selectedObject = null;
 			draw();
 		}
-	}
+	}*/
 };
 
 document.onkeyup = function(e) {
@@ -321,8 +322,8 @@ document.onkeypress = function(e) {
 		// don't read keystrokes when other things have focus
 		return true;
 	} else if(key >= 0x20 && key <= 0x7E && !e.metaKey && !e.altKey && !e.ctrlKey && selectedObject != null && 'text' in selectedObject) {
-		selectedObject.text += String.fromCharCode(key);
-		resetCaret();
+		//selectedObject.text += String.fromCharCode(key);
+		//resetCaret();
 		draw();
 
 		// don't let keys do their actions (like space scrolls down the page)

@@ -16,7 +16,6 @@ body {
 	font: bold italic 10px Georgia, serif;
 }
 
-
 .navbar {
 	font: bold italic 20px Verdana;
 }
@@ -47,7 +46,7 @@ h1 {
 }
 
 #step, #step3{
-	font: bold italic 35px Verdana, serif;
+	font: italic 20px Verdana, serif;
 }
 
 #exportS {
@@ -208,7 +207,12 @@ canvas {
 }
 
 #verifyAlert {
-	font: bold italic 30px Consolas, serif;
+	font: bold italic 20px Consolas, serif;
+	margin-bottom:50px;
+}
+
+#cpAlert {
+	font: bold italic 20px Consolas, serif;
 	margin-bottom:50px;
 }
 

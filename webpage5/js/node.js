@@ -25,7 +25,7 @@ Node.prototype.draw = function(c) {
 	c.stroke();
 
 	// draw the text
-	drawText(c, this.text, this.x, this.y, null, selectedObject == this);
+	drawText(c, this.text, this.x, this.y, null, false);
 
 	// draw a double circle for an accept state
 	if(this.isAcceptState) {

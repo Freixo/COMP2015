@@ -58,7 +58,7 @@
 		
         <!-- /.row -->
 
-		<div id="step" class="alert alert-info" role="alert"> Step 1: Select an input method. </div>
+		<div id="step" class="alert alert-info" role="alert"> <b>Step 1:</b> Select an input method. </div>
 		
 		<div id="selectmode" class="row pull-center">
 			
@@ -78,8 +78,8 @@
 
 		<script>
 		function textAreaAdjust(o) {
-			o.style.height = "1px";
-			o.style.height = (25+o.scrollHeight)+"px";
+			//o.style.height = "1px";
+			o.style.height = (25+$("#inputText").val().lineCount()*25)+"px";
 		}
 		</script>
 		
@@ -98,17 +98,18 @@
 		
 		</div>
 
-		
+		<div id="verifyAlert" class="alert alert-warning" role="alert" hidden>
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+		</div>
 
 		<div id="tmcontrolpanel" class="row" hidden>
 			<hr>
 			<div id="step3" class="alert alert-info" style="margin-bottom:60px;margin-top:60px" role="alert">
-				Step 3: Start the TM and have fun. 
+				<b>Step 3:</b> Start the TM and have fun. 
 			</div>
 		
-			<div id="verifyAlert" class="alert alert-warning" role="alert" hidden>
+			<div id="cpAlert" class="alert alert-warning" role="alert" hidden>
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span></span>
 			</div>
 			
 			<div class="col-lg-2">
@@ -124,7 +125,7 @@
 				<button id="result" class="btn btn-default"> Waiting </button>
 
 				<p id="resultp" class="pull-center">Current State:</p>
-				<button id="curState" class="btn btn-default">&nbsp;</button>
+				<button id="curState" class="btn btn-default"> &nbsp; </button>
 			</div>
 
 			<div class="col-lg-9" >

@@ -1,21 +1,6 @@
-/*
-	Default driver template for JS/CC generated parsers for Mozilla/Rhino
-	
-	WARNING: Do not use for parsers that should run as browser-based JavaScript!
-			 Use driver_web.js_ instead!
-	
-	Features:
-	- Parser trace messages
-	- Step-by-step parsing
-	- Integrated panic-mode error recovery
-	- Pseudo-graphical parse tree generation
-	
-	Written 2007 by Jan Max Meyer, J.M.K S.F. Software Technologies
-        Modified 2007 from driver.js_ to support Mozilla/Rhino
-           by Louis P.Santillan <lpsantil@gmail.com>
-	
-	This is in the public domain.
-*/
+String.prototype.lines = function() { return this.split(/\r*\n/); }
+String.prototype.lineCount = function() { return this.lines().length; }
+
 var semTree = [];
 var states=[],alphabet=[],blank,initial,final=[],transitions=[],input=[];
 
@@ -34,12 +19,15 @@ $( document ).ready(function() {
 
 		if (validTM == "T") {
 			$("#verifyAlert").hide();
+			$("#cpAlert").hide();
 			
 		}
 
 	});
 	
 });
+
+var page = $("html, body");
 
 function updateVerifyUI() {
 	if (validTM == "T") {
@@ -56,10 +44,20 @@ function updateVerifyUI() {
 		$("#tmcontrolpanel").show();
 		
 		
-
+		/*
 		$('html, body').animate({
 			scrollTop: $("#step3").offset().top - 100
 		}, 500);
+		*/
+
+		page.on("scroll mousedown wheel DOMMouseScroll mousewheel keyup touchmove", function(){
+			page.stop();
+		});
+
+		page.animate({ scrollTop: $("#step3").offset().top - 150 }, 'slow', function(){
+			page.off("scroll mousedown wheel DOMMouseScroll mousewheel keyup touchmove");
+		});
+		
 		
 	} else if (validTM == "F") {
 		$("#lexicalVerification span").first().removeClass('glyphicon-question-sign');
