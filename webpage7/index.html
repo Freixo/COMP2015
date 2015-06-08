@@ -95,7 +95,60 @@
 		</div>
 		
 		<div id="uiModeArea" hidden>
+			
+			<button id="uiReset" class = "btn btn-danger pull-center" style="width:120px;"><span class="glyphicon glyphicon-trash"></span> Reset </Button><br><br>
+			
+			<div id="patternWarn" class="alert alert-warning pull-center" role="alert" hidden style="width:60%;text-align:center;margin: 20px auto;font: italic 20px Verdana, serif;";>
+				<b>Follow the pattern: q0,q1,q2 <b>
+			</div>
+			
+			<input type="text" id="addStateText" placeholder="q0,q1,q2"><button id="addState" class = "btn btn-default pull-center"><span class="glyphicon glyphicon-check"></span> Set States </Button><br>
+			<input type="text" id="addAlphabetText" placeholder="0,1,B"><button id="addAlphabet" class = "btn btn-default pull-center"><span class="glyphicon glyphicon-check"></span> Set Alphabet </Button><br>
+			
+			<select id="setBlank" class="form-control" disabled></select>
+			<button id="setBlankBtn" class = "btn btn-default" disabled><span class="glyphicon glyphicon-check"></span> Set Blank </Button><br>
 		
+			<select id="setInitState" class="form-control" disabled></select>
+			<button id="setInitStateBtn" class = "btn btn-default " disabled><span class="glyphicon glyphicon-check"></span> Set Init State </Button><br>
+			
+			<input type="text" id="setEndState" placeholder="q0,q1,q2">
+			<button id="setEndStateBtn" class = "btn btn-default" disabled><span class="glyphicon glyphicon-check"></span> Set End States </Button><br>
+			
+
+			<div class="row" id="transDiv" >
+				<div class="col-lg-6" style="text-align: right;">
+				In State <select id="transInitState" class="form-control" disabled></select><br>
+				Input <select id="transInput" class="form-control" disabled></select>
+				</div>
+				<div class="col-lg-6" style="text-align: right;">
+				Out State<select id="transEndState" class="form-control" disabled></select><br>
+				Output <select id="transOutput" class="form-control" disabled></select><br>
+				Move <select id="transMove" class="form-control" disabled>
+						<option value="L">Left</option>
+						<option value="R">Right</option>
+						<option value="S">Stay</option>
+					</select><br>
+				</div>
+				<button id="addTransition" class ="btn btn-default pull-center" disabled><span class="glyphicon glyphicon-plus"></span> Add Transition </Button><br>
+				
+				<div id="transWarning" class="alert alert-success pull-center" role="alert" hidden style="width:50%;text-align:center;margin: 20px auto">
+					<b>Transition Added! <b>
+				</div>
+				
+				<select id="transList" class="form-control pull-center">
+					<option value="" disabled selected>Transition List</option>
+				</select>
+				
+				<button id="transRemove" class="btn btn-danger" style="width:90px;margin-top:10px;"> Delete </button>
+				
+			</div>
+			
+			<div id="uiWarning" class="alert alert-warning" role="alert" hidden>
+				<b>Missing Input! <b>
+			</div>
+			
+			<button id="lexicalVerification2" class="btn btn-primary pull-center"> Verify <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></button>
+
 		</div>
 
 		<div id="verifyAlert" class="alert alert-warning" role="alert" hidden>
