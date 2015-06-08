@@ -29,6 +29,30 @@ function verifyLex(str) {
 }
 
 
+/*
+	Default driver template for JS/CC generated parsers for Mozilla/Rhino
+	
+	WARNING: Do not use for parsers that should run as browser-based JavaScript!
+			 Use driver_web.js_ instead!
+	
+	Features:
+	- Parser trace messages
+	- Step-by-step parsing
+	- Integrated panic-mode error recovery
+	- Pseudo-graphical parse tree generation
+	
+	Written 2007 by Jan Max Meyer, J.M.K S.F. Software Technologies
+        Modified 2007 from driver.js_ to support Mozilla/Rhino
+           by Louis P.Santillan <lpsantil@gmail.com>
+	
+	This is in the public domain.
+*/
+
+
+var _dbg_withparsetree	= true;
+var _dbg_withtrace		= false;
+var _dbg_withstepbystep	= false;
+
 function __dbg_print( text )
 {
 	//print( text );
@@ -856,7 +880,8 @@ var pop_tab = new Array(
 	new Array( 35/* transitions */, 3 ),
 	new Array( 39/* transition */, 16 ),
 	new Array( 39/* transition */, 0 ),
-	new Array( 36/* input */, 3 )
+	new Array( 36/* input */, 3 ),
+	new Array( 36/* input */, 0 )
 );
 
 /* Action-Table */
@@ -891,7 +916,7 @@ var act_tab = new Array(
 	/* State 27 */ new Array( 15/* "ENDSTATESTART" */,22 ),
 	/* State 28 */ new Array( 11/* "BLANKSTART" */,-8 ),
 	/* State 29 */ new Array( 25/* "CHAR" */,20 ),
-	/* State 30 */ new Array( 21/* "INPUTSTART" */,38 ),
+	/* State 30 */ new Array( 21/* "INPUTSTART" */,38 , 6/* "TMEND" */,-18 ),
 	/* State 31 */ new Array( 19/* "TRANSITIONSTART" */,40 , 18/* "TRANSITIONSEND" */,-16 ),
 	/* State 32 */ new Array( 16/* "ENDSTATEND" */,41 ),
 	/* State 33 */ new Array( 15/* "ENDSTATESTART" */,-12 ),
@@ -903,9 +928,9 @@ var act_tab = new Array(
 	/* State 39 */ new Array( 18/* "TRANSITIONSEND" */,44 ),
 	/* State 40 */ new Array( 2/* "LEFTPARA" */,45 ),
 	/* State 41 */ new Array( 17/* "TRANSITIONSSTART" */,-13 ),
-	/* State 42 */ new Array( 21/* "INPUTSTART" */,38 ),
+	/* State 42 */ new Array( 21/* "INPUTSTART" */,38 , 6/* "TMEND" */,-18 ),
 	/* State 43 */ new Array( 22/* "INPUTEND" */,47 ),
-	/* State 44 */ new Array( 21/* "INPUTSTART" */,-14 ),
+	/* State 44 */ new Array( 21/* "INPUTSTART" */,-14 , 6/* "TMEND" */,-14 ),
 	/* State 45 */ new Array( 26/* "STRING" */,48 ),
 	/* State 46 */ new Array( 6/* "TMEND" */,-3 ),
 	/* State 47 */ new Array( 6/* "TMEND" */,-17 ),
@@ -1296,6 +1321,11 @@ switch( act )
 		rval = vstack[ vstack.length - 3 ];
 	}
 	break;
+	case 18:
+	{
+		rval = vstack[ vstack.length - 0 ];
+	}
+	break;
 }
 
 
@@ -1368,14 +1398,18 @@ switch( act )
 
 function __dbg_parsetree( indent, nodes, tree )
 {
-	var str;
-	
+	var str = new String();
 	for( var i = 0; i < tree.length; i++ )
 	{
-		str = nodes[ tree[i] ].sym;
+		str = "";
+		for( var j = indent; j > 0; j-- )
+			str += "\t";
+		
+		str += nodes[ tree[i] ].sym;
 		if( nodes[ tree[i] ].att != "" )
-			semTree.push([str,nodes[ tree[i] ].att]);
+			str += " >" + nodes[ tree[i] ].att + "<" ;
 			
+		__dbg_print( str );
 		if( nodes[ tree[i] ].child.length > 0 )
 			__dbg_parsetree( indent + 1, nodes, nodes[ tree[i] ].child );
 	}
@@ -1563,6 +1597,8 @@ function verifySemantic(){
 					else if(!statesPresent){
 						if((states.indexOf(semTree[i][1])==-1))
 							states.push(semTree[i][1]);
+						if((statesWithEntry.indexOf(semTree[i][1])==-1))
+							statesWithEntry.push(semTree[i][1]);
 						transition.push(semTree[i][1]);
 					}
 					else{
@@ -1641,7 +1677,17 @@ function verifySemantic(){
 				var def = new Definition(
 						states,alphabet,blank,initial,final
 				);
-	
+				
+				states.splice(states.indexOf(initial),1);
+				
+				for(var t=0; t<states.length; t++){
+					for(var v=0; v<statesWithEntry.length; v++){
+						if(states.indexOf(statesWithEntry[v])!==-1)
+							states.splice(states.indexOf(statesWithEntry[v]),1);
+					}
+				}
+				if(states.length!==0)
+					alert("States without entry point:"+JSON.stringify(states));
 				tMachine = new TuringMachine(def, transitions);
 				validTM = "T";
 				updateVerifyUI();
