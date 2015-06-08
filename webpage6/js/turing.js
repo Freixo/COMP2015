@@ -3,7 +3,7 @@ var curLinkID = 0;
 
 var tMachine;
 var tmRunning = false;
-
+var lastState;
 
 String.prototype.replaceAt=function(index, character) {
     return this.substr(0, index) + character + this.substr(index+character.length);
@@ -274,6 +274,11 @@ function clearTape() {
 
 function tmStart() {
 
+	lastState = tMachine.curState;
+	
+	//console.log("Last State:" + lastState);
+	//console.log("Current State: " + tMachine.curState);
+
 	if (validTM != "T") {
 		if (validTM == "?") {
 			$("#cpAlert").removeClass("alert-danger");
@@ -348,6 +353,8 @@ function tmReset() {
 	document.getElementById("Steps").innerHTML=0;
 	document.getElementById("States").innerHTML=0;
 
+	lastState = tMachine.curState;
+	
 	var pattern = "^([" + tMachine.definition.alphabet.join("") + "]+)$";
 	if ($("#tminput").val() == "") {
 		$("#cpAlert").removeClass("alert-danger");
@@ -379,6 +386,14 @@ function tmReset() {
 
 function tmNext() {
 	tMachine.next();
+	
+	//console.log("Last State:" + lastState);
+	//console.log("Current State: " + tMachine.curState);
+	
+	if(lastState !== tMachine.curState){
+		document.getElementById("States").innerHTML = parseInt(document.getElementById("States").innerHTML)+1;
+		lastState = tMachine.curState;
+	}
 	document.getElementById("Steps").innerHTML = parseInt(document.getElementById("Steps").innerHTML)+1;
 	if (tMachine.halt) {
 		$("#next").addClass("disabled");
