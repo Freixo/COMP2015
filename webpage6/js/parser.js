@@ -1,3 +1,4 @@
+//6
 var _dbg_withparsetree	= true;
 var _dbg_withtrace		= false;
 var _dbg_withstepbystep	= false;
@@ -47,11 +48,6 @@ function verifyLex(str) {
 	
 	This is in the public domain.
 */
-
-
-var _dbg_withparsetree	= true;
-var _dbg_withtrace		= false;
-var _dbg_withstepbystep	= false;
 
 function __dbg_print( text )
 {
@@ -1399,17 +1395,13 @@ switch( act )
 function __dbg_parsetree( indent, nodes, tree )
 {
 	var str = new String();
+	
 	for( var i = 0; i < tree.length; i++ )
 	{
-		str = "";
-		for( var j = indent; j > 0; j-- )
-			str += "\t";
-		
-		str += nodes[ tree[i] ].sym;
+		str = nodes[ tree[i] ].sym;
 		if( nodes[ tree[i] ].att != "" )
-			str += " >" + nodes[ tree[i] ].att + "<" ;
+			semTree.push([str,nodes[ tree[i] ].att]);
 			
-		__dbg_print( str );
 		if( nodes[ tree[i] ].child.length > 0 )
 			__dbg_parsetree( indent + 1, nodes, nodes[ tree[i] ].child );
 	}
@@ -1419,7 +1411,7 @@ function __dbg_parsetree( indent, nodes, tree )
 
 function verifySemantic(){
 	
-	var state, statesPresent=false, alphabetPresent=false, counter=0;
+	var state, statesPresent=false, alphabetPresent=false, counter=0, inputString="", statesWithEntry=[];
 	
 	alphabet=[],states=[],blank='',initial="",final=[],transitions=[],input=[];
 		
@@ -1591,14 +1583,14 @@ function verifySemantic(){
 					}
 					
 					i+=4;
+					if((statesWithEntry.indexOf(semTree[i][1])==-1))
+							statesWithEntry.push(semTree[i][1]);
 					
 					if((states.indexOf(semTree[i][1])!=-1) && statesPresent)
 						transition.push(semTree[i][1]);
 					else if(!statesPresent){
 						if((states.indexOf(semTree[i][1])==-1))
 							states.push(semTree[i][1]);
-						if((statesWithEntry.indexOf(semTree[i][1])==-1))
-							statesWithEntry.push(semTree[i][1]);
 						transition.push(semTree[i][1]);
 					}
 					else{
@@ -1660,6 +1652,7 @@ function verifySemantic(){
 			case 'input':
 				if(semTree[i][0] === 'STRING')
 				{
+					inputString=semTree[i][1];
 					var inp = semTree[i][1].split("");
 					for(var j=0;j<inp.length;j++){
 						if(alphabet.indexOf(inp[j])==-1)
@@ -1677,18 +1670,23 @@ function verifySemantic(){
 				var def = new Definition(
 						states,alphabet,blank,initial,final
 				);
+				var newStates = states.slice();
 				
-				states.splice(states.indexOf(initial),1);
+				newStates.splice(newStates.indexOf(initial),1);
 				
-				for(var t=0; t<states.length; t++){
+				for(var t=0; t<newStates.length; t++){
 					for(var v=0; v<statesWithEntry.length; v++){
-						if(states.indexOf(statesWithEntry[v])!==-1)
-							states.splice(states.indexOf(statesWithEntry[v]),1);
+						if(newStates.indexOf(statesWithEntry[v])!==-1){
+							newStates.splice(newStates.indexOf(statesWithEntry[v]),1);
+						}
 					}
 				}
-				if(states.length!==0)
-					alert("States without entry point:"+JSON.stringify(states));
+				if(newStates.length!==0)
+					alert("States without entry point:"+JSON.stringify(newStates));
+				
+				
 				tMachine = new TuringMachine(def, transitions);
+				$("#tminput").val(inputString);
 				validTM = "T";
 				updateVerifyUI();
 				

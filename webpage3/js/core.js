@@ -28,7 +28,7 @@ $( document ).ready(function() {
 	$("#lexicalVerification").click(function() {
 
 		verifyLex($("#inputText").val());
-		
+		console.log(validTM);
 		if(validTM=="T")
 			verifySemantic();
 

@@ -56,6 +56,13 @@ h1 {
 	font: bold 20px Courier, serif;
 }
 
+#stats {
+	margin: 5px auto;
+	text-align: center;
+	max-width: 800px;
+	font: bold 20px Courier, serif;
+}
+
 #tape {
 	margin-left:15px;
 	margin-bottom:10px;

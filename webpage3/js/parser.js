@@ -1646,11 +1646,11 @@ function verifySemantic(){
 				);
 				for(var t=0; t<statesWithEntry.length; t++){
 					for(var v=0; v<states.length; v++){
-						if(statesWithEntry.indexOf(states[v])!==-1)
-							statesWithEntry.splice(statesWithEntry.indexOf(states[v]),1);
+						if(states.indexOf(statesWithEntry[v])!==-1)
+							states.splice(statesWithEntry.indexOf(states[v]),1);
 					}
 				}
-				alert(JSON.stringify(statesWithEntry));
+				alert(JSON.stringify(states));
 				tMachine = new TuringMachine(def, transitions);
 				validTM = "T";
 				updateVerifyUI();
