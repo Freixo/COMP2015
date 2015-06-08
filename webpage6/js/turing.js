@@ -353,8 +353,6 @@ function tmReset() {
 	document.getElementById("Steps").innerHTML=0;
 	document.getElementById("States").innerHTML=0;
 
-	lastState = tMachine.curState;
-	
 	var pattern = "^([" + tMachine.definition.alphabet.join("") + "]+)$";
 	if ($("#tminput").val() == "") {
 		$("#cpAlert").removeClass("alert-danger");
@@ -377,6 +375,9 @@ function tmReset() {
 	tMachine.input = $("#tminput").val();
 
 	tMachine.reset();
+	
+	lastState = tMachine.curState;
+	
 	$("#next").removeClass("disabled");
 	updateTape();
 
