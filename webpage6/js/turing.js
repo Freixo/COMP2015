@@ -377,6 +377,7 @@ function tmReset() {
 
 function tmNext() {
 	tMachine.next();
+	document.getElementById("Steps").value = document.getElementById("Steps").value+1;
 	if (tMachine.halt) {
 		$("#next").addClass("disabled");
 		$("html").focus();

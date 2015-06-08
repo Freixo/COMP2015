@@ -1419,7 +1419,7 @@ function __dbg_parsetree( indent, nodes, tree )
 
 function verifySemantic(){
 	
-	var state, statesPresent=false, alphabetPresent=false, counter=0;
+	var state, statesPresent=false, alphabetPresent=false, counter=0, inputString="";;
 	
 	alphabet=[],states=[],blank='',initial="",final=[],transitions=[],input=[];
 		
@@ -1660,6 +1660,7 @@ function verifySemantic(){
 			case 'input':
 				if(semTree[i][0] === 'STRING')
 				{
+					inputString=semTree[i][1];
 					var inp = semTree[i][1].split("");
 					for(var j=0;j<inp.length;j++){
 						if(alphabet.indexOf(inp[j])==-1)
@@ -1688,7 +1689,14 @@ function verifySemantic(){
 				}
 				if(states.length!==0)
 					alert("States without entry point:"+JSON.stringify(states));
+					
+				console.log(inputString);
+					
+				console.log(JSON.stringify(def));
+				console.log(JSON.stringify(transitions));
+				
 				tMachine = new TuringMachine(def, transitions);
+				$("#tminput").val(inputString);
 				validTM = "T";
 				updateVerifyUI();
 				
