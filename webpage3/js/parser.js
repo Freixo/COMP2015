@@ -1385,7 +1385,7 @@ function __dbg_parsetree( indent, nodes, tree )
 
 function verifySemantic(){
 	
-	var state, statesPresent=false, alphabetPresent=false, counter=0;
+	var state, statesPresent=false, alphabetPresent=false, counter=0,statesWithEntry=[];
 	
 	alphabet=[],states=[],blank='',initial="",final=[],transitions=[],input=[];
 		
@@ -1563,7 +1563,10 @@ function verifySemantic(){
 					else if(!statesPresent){
 						if((states.indexOf(semTree[i][1])==-1))
 							states.push(semTree[i][1]);
+						if((statesWithEntry.indexOf(semTree[i][1])==-1))
+							statesWithEntry.push(semTree[i][1]);
 						transition.push(semTree[i][1]);
+						
 					}
 					else{
 						validTM = "F";
@@ -1641,7 +1644,13 @@ function verifySemantic(){
 				var def = new Definition(
 						states,alphabet,blank,initial,final
 				);
-	
+				for(var t=0; t<statesWithEntry.length; t++){
+					for(var v=0; v<states.length; v++){
+						if(statesWithEntry.indexOf(states[v])!==-1)
+							statesWithEntry.splice(statesWithEntry.indexOf(states[v]),1);
+					}
+				}
+				alert(JSON.stringify(statesWithEntry));
 				tMachine = new TuringMachine(def, transitions);
 				validTM = "T";
 				updateVerifyUI();
