@@ -1411,7 +1411,7 @@ function __dbg_parsetree( indent, nodes, tree )
 
 function verifySemantic(){
 	
-	var state, statesPresent=false, alphabetPresent=false, counter=0, inputString="";;
+	var state, statesPresent=false, alphabetPresent=false, counter=0, inputString="", statesWithEntry=[];
 	
 	alphabet=[],states=[],blank='',initial="",final=[],transitions=[],input=[];
 		
@@ -1583,14 +1583,14 @@ function verifySemantic(){
 					}
 					
 					i+=4;
+					if((statesWithEntry.indexOf(semTree[i][1])==-1))
+							statesWithEntry.push(semTree[i][1]);
 					
 					if((states.indexOf(semTree[i][1])!=-1) && statesPresent)
 						transition.push(semTree[i][1]);
 					else if(!statesPresent){
 						if((states.indexOf(semTree[i][1])==-1))
 							states.push(semTree[i][1]);
-						if((statesWithEntry.indexOf(semTree[i][1])==-1))
-							statesWithEntry.push(semTree[i][1]);
 						transition.push(semTree[i][1]);
 					}
 					else{
@@ -1675,17 +1675,14 @@ function verifySemantic(){
 				
 				for(var t=0; t<states.length; t++){
 					for(var v=0; v<statesWithEntry.length; v++){
-						if(states.indexOf(statesWithEntry[v])!==-1)
+						if(states.indexOf(statesWithEntry[v])!==-1){
+							console.log(statesWithEntry[v]);
 							states.splice(states.indexOf(statesWithEntry[v]),1);
+						}
 					}
 				}
 				if(states.length!==0)
 					alert("States without entry point:"+JSON.stringify(states));
-					
-				console.log(inputString);
-					
-				console.log(JSON.stringify(def));
-				console.log(JSON.stringify(transitions));
 				
 				tMachine = new TuringMachine(def, transitions);
 				$("#tminput").val(inputString);

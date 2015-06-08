@@ -242,7 +242,6 @@ Transition.prototype.toString = function(transition) {
 
 function initializeTape() {
 	$("#curState").text(tMachine.curState);
-
 	$("#tape").empty();
 	for (var i = 0, len = tMachine.tape.length; i < len; i++) {
 		if (i == 1) {
@@ -345,6 +344,9 @@ function tmDelete() {
 }
 
 function tmReset() {
+	
+	document.getElementById("Steps").innerHTML=0;
+	document.getElementById("States").innerHTML=0;
 
 	var pattern = "^([" + tMachine.definition.alphabet.join("") + "]+)$";
 	if ($("#tminput").val() == "") {
@@ -377,7 +379,7 @@ function tmReset() {
 
 function tmNext() {
 	tMachine.next();
-	document.getElementById("Steps").value = document.getElementById("Steps").value+1;
+	document.getElementById("Steps").innerHTML = parseInt(document.getElementById("Steps").innerHTML)+1;
 	if (tMachine.halt) {
 		$("#next").addClass("disabled");
 		$("html").focus();
