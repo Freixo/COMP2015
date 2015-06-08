@@ -195,7 +195,7 @@ $( document ).ready(function() {
 				tmCode = tmCode + "\n\t\t" + transitionsArr[i];
 			}
 			
-			tmCode = tmCode + "\n\t</TRANSITIONS>\n\t<INPUT>11</INPUT>\n</TM>";
+			tmCode = tmCode + "\n\t</TRANSITIONS>\n</TM>";
 			
 			$("#inputText").val(tmCode);
 			
